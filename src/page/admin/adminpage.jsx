@@ -3,6 +3,8 @@ import { BsGraphDown } from "react-icons/bs";
 import { FaRegBookmark, FaRegUser } from "react-icons/fa";
 import { BsSpeaker } from "react-icons/bs";
 import { Link, Route, Routes } from "react-router-dom";
+import AdminItempage from "./adminItempage";
+import Additempage from "./additempage";
 
 
 export default function Adminpage(){
@@ -27,9 +29,11 @@ export default function Adminpage(){
           </Link>
 
         </div>
-        <div className='w-[calc(100vw-400px)] bg-red-900'>
+        <div className='w-[calc(100vw-400px)]'>
             <Routes path="/*" >
                 <Route path="/booking" element={<h1>booking</h1>}/>
+                <Route path="/items" element={<AdminItempage/>}/>
+                <Route path="/item/add" element={<Additempage/>}/>
             </Routes>
 
         </div>
