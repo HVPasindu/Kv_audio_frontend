@@ -5,6 +5,7 @@ import { BsSpeaker } from "react-icons/bs";
 import { Link, Route, Routes } from "react-router-dom";
 import AdminItempage from "./adminItempage";
 import Additempage from "./additempage";
+import UpdateItemPage from "./updateItem";
 
 
 export default function Adminpage(){
@@ -34,6 +35,7 @@ export default function Adminpage(){
                 <Route path="/booking" element={<h1>booking</h1>}/>
                 <Route path="/items" element={<AdminItempage/>}/>
                 <Route path="/item/add" element={<Additempage/>}/>
+                <Route path="/item/edit" element={<UpdateItemPage/>}/>
             </Routes>
 
         </div>
