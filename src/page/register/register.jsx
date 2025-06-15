@@ -1,0 +1,89 @@
+import { useState } from "react";
+import "./register.css";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+
+export default function RegisterPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  //const [role, setRole] = useState("");
+  const [address, setAddress] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const navigate=useNavigate();
+
+  function handleOnSubmit(){
+    axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/`,{
+        email:email,
+        password:password,
+        firstName:firstName,
+        lastName:lastName,
+        //role:role,
+        address:address,
+        phoneNumber:phoneNumber
+    }).then((res)=>{
+        toast.success(res.data.message);
+        navigate("/login");
+         
+    }).catch((err)=>{
+        toast.error(err?.response?.data?.error||"An error occured..")
+    })
+  }
+
+  return (
+    <div className="bg-picture h-screen flex justify-center items-center">
+      <div className="w-[400px] h-[650px] backdrop-blur-sm rounded-2xl flex flex-col items-center overflow-y-auto py-4">
+        <img
+          src="/logo.png"
+          alt="logo"
+          className="w-[150px] h-[150px] object-cover"
+        />
+
+        <input
+          type="text"
+          placeholder="First Name"
+          className="mt-3 w-[300px] h-[40px] bg-transparent border-b-2 border-white text-white text-xl outline-none"
+          onChange={(e) => setFirstName(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Last Name"
+          className="mt-3 w-[300px] h-[40px] bg-transparent border-b-2 border-white text-white text-xl outline-none"
+          onChange={(e) => setLastName(e.target.value)}
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          className="mt-3 w-[300px] h-[40px] bg-transparent border-b-2 border-white text-white text-xl outline-none"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          className="mt-3 w-[300px] h-[40px] bg-transparent border-b-2 border-white text-white text-xl outline-none"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        
+        <input
+          type="text"
+          placeholder="Address"
+          className="mt-3 w-[300px] h-[40px] bg-transparent border-b-2 border-white text-white text-xl outline-none"
+          onChange={(e) => setAddress(e.target.value)}
+        />
+        <input
+          type="tel"
+          placeholder="Phone Number"
+          className="mt-3 w-[300px] h-[40px] bg-transparent border-b-2 border-white text-white text-xl outline-none"
+          onChange={(e) => setPhoneNumber(e.target.value)}
+        />
+
+        <button className="w-[300px] h-[45px] text-xl text-white rounded-lg bg-[#efac38] mt-6" onClick={handleOnSubmit}>
+          Register
+        </button>
+      </div>
+    </div>
+  );
+}
