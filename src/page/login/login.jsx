@@ -10,7 +10,8 @@ export default function LoginPage(){
 
     function login(){
         console.log(email,password);
-        axios.post("http://localhost:3000/api/user/login",{
+        const backendUrl = import.meta.env.VITE_BACKEND_URL
+        axios.post(`${backendUrl}/api/user/login`,{
             email:email,
             password:password
         }).then((res)=>{

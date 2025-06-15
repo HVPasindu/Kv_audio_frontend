@@ -17,7 +17,7 @@ export default function AddItemPage() {
     const token=localStorage.getItem("token");
     if(token){
         try{
-       const result= await axios.post("http://localhost:3000/api/product/" ,
+       const result= await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/product/` ,
           { key:productKey,
             name:productName,
             price:productPrice,
