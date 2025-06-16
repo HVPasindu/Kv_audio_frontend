@@ -1,26 +1,26 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function ProductImageCarousel({ images, alt }) {
-  const [index, setIndex] = useState(0);
+export default function ProductImageCarousel({ images = [], alt }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % images.length);
-    }, 3000); // switch every 3 seconds
-
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, 3000); // change every 3s
     return () => clearInterval(interval);
   }, [images]);
 
+  if (!images.length) return null;
+
   return (
-    <div className="w-full h-48 overflow-hidden rounded-t-xl">
-      <img
-        src={images[index]}
-        alt={alt}
-        className="w-full h-full object-cover transition duration-500"
-        onError={(e) => {
-          e.target.src = "/empty.jpg";
-        }}
-      />
-    </div>
+    <img
+      src={images[currentIndex] || "/empty.jpg"}
+      alt={alt}
+      className="w-full h-48 object-cover"
+      onError={(e) => {
+        e.target.onerror = null;
+        e.target.src = "/empty.jpg";
+      }}
+    />
   );
 }
