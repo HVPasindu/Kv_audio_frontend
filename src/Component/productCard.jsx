@@ -1,4 +1,7 @@
 import ProductImageCarousel from "./imageswitch";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // default styles
+import { Carousel } from "react-responsive-carousel";
+
 
 export default function ProductCard({ item }) {
   return (
@@ -16,9 +19,33 @@ export default function ProductCard({ item }) {
       }}
     />
     ))} */}
-      {/* <ProductImageCarousel images={item.image} alt={item.name} /> 
-      {console.log(item.name, item.image)} */}
+     
+    <Carousel
+  autoPlay
+  infiniteLoop
+  showThumbs={false}
+  showStatus={false}
+  className="w-full h-48"
+>
+  {item.image?.map((imgUrl, index) => (
+    <div key={index}>
       <img
+        src={imgUrl || "/empty.jpg"}
+        alt={`${item.name}-${index}`}
+        className="w-full h-48 object-cover"
+        onError={(e) => {
+          e.target.onerror = null;
+          e.target.src = "/empty.jpg";
+        }}
+      />
+    </div>
+  ))}
+</Carousel>
+
+
+       {/* <ProductImageCarousel images={item.image} alt={item.name} /> 
+      {console.log(item.name, item.image)}  */}
+      {/* <img
       src={item.image?.[0] || "/empty.jpg"}
       alt={item.name}
       onError={(e) => {
@@ -26,7 +53,7 @@ export default function ProductCard({ item }) {
         e.target.src = "/empty.jpg";
       }}
      className="w-full h-48 object-cover"
-    />
+    /> */}
 
 
 
