@@ -16,7 +16,7 @@ export default function ProductCard({ item }) {
       }}
     />
     ))} */}
-    <ProductImageCarousel images={item.image} alt={item.name} />
+    {/* <ProductImageCarousel images={item.image} alt={item.name} /> */}
 
 
 
