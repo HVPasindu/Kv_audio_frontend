@@ -1,13 +1,24 @@
+import ProductImageCarousel from "./imageswitch";
+
 export default function ProductCard({ item }) {
   return (
     <div className="bg-white rounded-xl shadow-lg overflow-hidden w-full max-w-sm hover:shadow-xl transition duration-300 flex flex-col justify-between">
       {/* Product Image */}
+      {/* {item.image?.map((imgUrl, index) => (
       <img
-        src={item.image}
-        alt={item.name}
-        className="w-full h-48 object-cover"
-        onError={(e) => (e.target.style.display = "none")} // hide broken image
-      />
+        key={index}
+        src={imgUrl || "/empty.jpg"}
+        alt={`${item.name} - ${index}`}
+        className="w-full h-32 object-cover rounded"
+        onError={(e) => {
+        e.target.onerror = null;
+        e.target.src = "/empty.jpg";
+      }}
+    />
+    ))} */}
+    <ProductImageCarousel images={item.image} alt={item.name} />
+
+
 
       {/* Content Section */}
       <div className="p-4 flex flex-col flex-grow">
