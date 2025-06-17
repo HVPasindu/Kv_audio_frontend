@@ -42,6 +42,16 @@ export default function ProductCard({ item }) {
     </div>
   ))}
 </Carousel>
+        {/* <img
+          src={item.image?.[0] || "/empty.jpg"}
+      alt={item.name}
+       onError={(e) => {
+      e.target.onerror = null;
+      e.target.src = "/empty.jpg";
+      }}
+    className="w-full h-48 object-cover"
+    /> */}
+
 
 
        {/* <ProductImageCarousel images={item.image} alt={item.name} /> 
