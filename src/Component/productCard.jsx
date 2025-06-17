@@ -1,6 +1,7 @@
 import ProductImageCarousel from "./imageswitch";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // default styles
 import { Carousel } from "react-responsive-carousel";
+import { Link } from "react-router-dom";
 
 
 export default function ProductCard({ item }) {
@@ -92,9 +93,9 @@ export default function ProductCard({ item }) {
         </div>
 
         {/* Button */}
-        <button className="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md text-sm font-semibold transition">
+        <Link to={"/product/"+item.key} className="text-center mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md text-sm font-semibold transition">
           View Details
-        </button>
+        </Link>
       </div>
     </div>
   );
