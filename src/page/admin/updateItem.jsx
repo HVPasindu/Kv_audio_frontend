@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
+import meadiaUpload from "../../utils/mediaUpload";
 
 export default function UpdateItemPage() {
   const location=useLocation();
@@ -12,10 +13,22 @@ export default function UpdateItemPage() {
   const [productCategory, setProductCategory] = useState(location.state.category);
   const [productDimension, setProductDimension] = useState(location.state.dimentions);
   const [productDescription, setProductDescription] = useState(location.state.description);
+  const [productImages,setProductImages]=useState([]);
   const navigate=useNavigate();
  
   async function handleAddItem(){
     //console.log(productKey,productName,productPrice,productCategory,productDimension,productDescription);
+    let updatingImages = location.state.image;
+    if(productImages.length>0){
+          const promises=[]
+          
+              for(let i=0;i<productImages.length;i++){
+                 //console.log(productImages[i]);
+                 const promise= meadiaUpload(productImages[i])
+                 promises.push(promise);
+              }
+                 updatingImages=await Promise.all(promises)
+    }
     const token=localStorage.getItem("token");
     if(token){
         try{
@@ -25,7 +38,8 @@ export default function UpdateItemPage() {
             price:productPrice,
             category:productCategory,
             dimentions:productDimension,
-            description:productDescription
+            description:productDescription,
+            image:updatingImages,
           },{
             headers:{
                 Authorization:"Bearer " + token
@@ -91,6 +105,12 @@ export default function UpdateItemPage() {
           onChange={(e) => setProductDescription(e.target.value)}
           className="border p-2 w-full rounded"
         />
+        <input
+          type="file"
+          multiple
+          onChange={(e)=>{setProductImages(e.target.files)}} className=" w-full p-2 border rounded "
+        />
+
         <button onClick={handleAddItem} className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full">Update Item
         </button>
         <button onClick={()=>{navigate("/admin/items")}} className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-800 w-full">Cancel</button>
