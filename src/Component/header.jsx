@@ -1,8 +1,9 @@
+import { FaCartShopping } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 export default function Header(){
     return(
-         <header className="w-full h-[100px] shadow-xl flex justify-center relative bg-accent text-white">
+         <header className="w-full h-[100px] shadow-xl flex justify-center items-center relative bg-accent text-white">
                 <img src="lo.png" alt="logo" className="w-[100px] h-[100px] object-cover border-[3px] bg-amber-100 items-center absolute left-1 rounded-full"/>
                 
                 <Link to="/" className="text-[25px] font-bold m-1">
@@ -16,6 +17,9 @@ export default function Header(){
                 </Link>
                 <Link to="/items" className="text-[25px] font-bold m-1">
                     Items
+                </Link>
+                <Link to="/booking" className="text-[25px] font-bold m-1 absolute right-3">
+                    <FaCartShopping/>
                 </Link>
             
          </header>
