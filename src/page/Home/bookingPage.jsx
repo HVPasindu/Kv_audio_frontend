@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { formatDate, loadCart } from "../../utils/cart";
 import BookingItem from "../../Component/bookingitem";
 import axios from "axios";
@@ -12,10 +12,32 @@ export default function BookingPage() {
 
   const [startDate, setStartDate] = useState(today);
   const [endDate, setEndDate] = useState(tomorrow);
+  const [total,setTotal] =useState(0);
 
   function realoadCart() {
     setCart(loadCart());
+    calculateToatal();
+    
   }
+
+  function calculateToatal(){
+    const cartInfo = loadCart();
+    cartInfo.startingDate=startDate;
+    cartInfo.endingDate=endDate;
+    cartInfo.days=calculateDays();
+    axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/orders/quote`,
+      cartInfo
+    ).then((res)=>{
+      console.log(res.data)
+      setTotal(res.data.total);
+    }).catch((err)=>{
+      console.error(err);
+    })
+  }
+
+  useEffect(()=>{
+    calculateToatal();
+  },[startDate,endDate])
 
   // Calculate number of days between start and end date
   const calculateDays = () => {
@@ -29,7 +51,13 @@ export default function BookingPage() {
   const totalDays = calculateDays();
 
   function handleBookingCreation(){
+
+
     const cart=loadCart();
+    if (cart.orderedItems.length === 0) {
+    toast.error("Your cart is empty. Please add items before booking.");
+    return;
+  }
     cart.startingDate = startDate;
     cart.endingDate = endDate;
     cart.days=calculateDays();
@@ -90,6 +118,9 @@ export default function BookingPage() {
             refresh={realoadCart}
           />
         ))}
+      </div>
+      <div className="w-full flex justify-center mt-4">
+        <p className="text-accent font-semibold">Total:{total.toFixed(2)}</p>
       </div>
       <div className="w-full flex justify-center mt-4 ">
         <button className="bg-accent text-white px-4 py-2 rounded-md" onClick={handleBookingCreation}>Create Booking</button>
