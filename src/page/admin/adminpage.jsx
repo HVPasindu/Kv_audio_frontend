@@ -8,8 +8,38 @@ import Additempage from "./additempage";
 import UpdateItemPage from "./updateItem";
 import AdminUserssPage from "./adminUsersPage";
 
+import AdminOrdersPage from "./adminorderspage";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 
 export default function Adminpage(){
+  const [userValidated,setUserValidated]=useState(false);
+  useEffect(()=>{
+    const token = localStorage.getItem("token");
+    if(!token){
+      window.location.href="/login";
+    }
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/user/validate`,{
+         headers: {
+            Authorization: `Bearer ${token}`,
+          },
+    }).then((res)=>{
+      console.log(res.data);
+      const user=res.data;
+      if(user.role=="admin"){
+        setUserValidated(true)
+        
+      }else{
+        window.location.href="/";
+      }
+      
+    }).catch((err)=>{
+      console.error(err);
+      setUserValidated(false)
+    })
+
+  },[])
     return(
         <div className='h-screen w-full flex'>
         <div className='w-[400px] h-full bg-accent'>
@@ -17,9 +47,9 @@ export default function Adminpage(){
             <BsGraphDown/>
             Dashboard
           </Link>
-          <Link to="/admin/booking" className='w-full h-[40px] text-[25px] font-bold flex justify-center items-center'>
+          <Link to="/admin/orders" className='w-full h-[40px] text-[25px] font-bold flex justify-center items-center'>
             <FaRegBookmark/>
-            Booking
+            Orders
           </Link>
            <Link to="/admin/items" className='w-full h-[40px] text-[25px] font-bold flex justify-center items-center'>
             <MdOutlineSpeaker/>
@@ -32,13 +62,13 @@ export default function Adminpage(){
 
         </div>
         <div className='w-[calc(100vw-400px)] bg-primary'>
-            <Routes path="/*" >
-                <Route path="/booking" element={<h1>booking</h1>}/>
+          {userValidated &&  <Routes path="/*" >
+                <Route path="/orders" element={<AdminOrdersPage/>}/>
                 <Route path="/users" element={<AdminUserssPage/>}/>
                 <Route path="/items" element={<AdminItempage/>}/>
                 <Route path="/item/add" element={<Additempage/>}/>
                 <Route path="/item/edit" element={<UpdateItemPage/>}/>
-            </Routes>
+            </Routes>}
 
         </div>
       </div>

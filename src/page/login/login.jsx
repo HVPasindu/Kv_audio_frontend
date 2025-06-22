@@ -26,7 +26,18 @@ export default function LoginPage(){
             }
         }).catch((err)=>{
             console.log(err)
-            toast.error(err.response.data.message)
+              // Show error message
+      let errorMessage = "An error occurred during login.";
+
+      // Check for a 403 error and display the block message
+      if (err.response && err.response.status === 403) {
+        errorMessage = err.response.data.error || "Your account is blocked. Please contact the admin.";
+      } else if (err.response && err.response.data && err.response.data.message) {
+        // Default error message from the backend
+        errorMessage = err.response.data.message;
+      }
+
+      toast.error(errorMessage)
         })
     }
 
