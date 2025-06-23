@@ -9,23 +9,24 @@ export default function Header(){
     return(
          <header className="w-full h-[70px] shadow-xl flex justify-center items-center relative bg-accent text-white">
                 <img src="/kv_logo.png" alt="logo" className="w-[60px] h-[60px] object-cover border-[3px] bg-amber-100 items-center absolute left-1 rounded-full"/>
-                
-                <Link to="/" className="text-[25px] font-bold m-1 hidden ">
+                <div className="hidden w-[450px] md:flex justify-evenly items-center">
+                <Link to="/" className="text-[25px]  m-1 hidden  md:block">
                     Home
                 </Link>
-                <Link to="/contact" className="text-[25px] font-bold m-1 hidden">
+                <Link to="/contact" className="text-[22px]  m-1 hidden md:block">
                     Contact
                 </Link>
-                <Link to="/gallery" className="text-[25px] font-bold m-1 hidden">
+                <Link to="/gallery" className="text-[22px]  m-1 hidden md:block">
                     Gallery
                 </Link>
-                <Link to="/items" className="text-[25px] font-bold m-1 hidden">
+                <Link to="/items" className="text-[22px] m-1 hidden md:block">
                     Items
                 </Link>
-                <Link to="/booking" className="text-[25px] font-bold m-1 absolute right-3 hidden">
+                <Link to="/booking" className="text-[22px]  m-1 absolute right-12 hidden md:block">
                     <FaCartShopping/>
                 </Link>
-                <GiHamburgerMenu className="absolute right-5 text-[24px] " onClick={()=>{
+                </div>
+                <GiHamburgerMenu className="absolute right-5 text-[24px] md:hidden " onClick={()=>{
                     setnavPanelOpen(true)
                 }}/>
                 <MobileNavPanel isOpen={navPanelOpen} setOpen={setnavPanelOpen}/>
