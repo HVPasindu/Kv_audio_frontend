@@ -23,11 +23,11 @@ export default function ProductOverview(){
     },[])
 
     return(
-        <div className="w-full  h-full flex justify-center ">
+        <div className="w-full   flex justify-center ">
             {
                 loadingStatus=="loading" && 
                 <div className="w-full h-full flex justify-center items-center"> 
-                    <div className="w-[50px] h-[50px] border-4 rounded-full border-t-green-500 animate-spin">
+                    <div className="w-[70px] h-[70px] border-b-2  rounded-full border-t-green-500 animate-spin">
 
                     </div>
 
@@ -35,15 +35,16 @@ export default function ProductOverview(){
             }
             {
                 loadingStatus=="loaded"&&
-                <div className="w-full h-full flex justify-center items-center ">
-                        <div className="w-[49%]  h-full">
-                            <ImageSlider images={product.image}/>
+                <div className="w-full h-full flex justify-center items-center flex-col ">
+                         <h1 className="text-3xl font-bold my-6  text-accent">{product.name} </h1>
+                        <div className="w-full  h-full">
+                             <ImageSlider images={product.image}/> 
                         </div>
-                        <div className="w-[49%] h-full flex flex-col items-center">
-                            <h1 className="text-3xl font-bold text-accent">{product.name} </h1>
-                            <h2 className="text-xl font-semibold text-gray-800">{product.category}</h2>
-                            <p className="text-gray-700 mt-4">{product.description}</p>
-                            <p className="text-lg font-bold text-green-500">{product.price}</p>
+                        <div className="w-full p-2  flex flex-col items-center">
+                           
+                            <h2 className="text-xl font-semibold text-gray-800">{product.category} (category)</h2>
+                            <p className="text-gray-700 mt-4 text-center">{product.description}</p>
+                            <p className="text-lg  text-green-500">Rs.{product.price.toFixed(2)}</p>
                             <div className="mt-4 text-sm text-gray-600">
                                 <span className="font-medium">Dimentions:</span>{product.dimensions}
                             </div>

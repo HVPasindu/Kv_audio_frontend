@@ -37,7 +37,7 @@ export default function RegisterPage() {
     <div className="bg-picture h-screen flex justify-center items-center">
       <div className="w-[400px] h-[650px] backdrop-blur-sm rounded-2xl flex flex-col items-center overflow-y-auto py-4">
         <img
-          src="/logo.png"
+          src="/kv_logo.png"
           alt="logo"
           className="w-[150px] h-[150px] object-cover"
         />

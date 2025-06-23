@@ -44,7 +44,7 @@ export default function LoginPage(){
     return(
     <div className="w-full h-screen bg-picture flex justify-center items-center">
         <div className="w-[400px] h-[400px] backdrop-blur-sm rounded-2xl flex flex-col items-center   ">
-            <img src="/logo.png" alt="logo" className="w-[200px] h-[200px] object-cover "/>
+            <img src="/kv_logo.png" alt="logo" className="w-[200px] h-[200px] object-cover "/>
 
             <input type="email" placeholder="Email" className="mt-6 w-[300px] h-[50px] bg-transparent border-b-2 border-white text-white text-2xl outline-none " onChange={(e)=>{
                 setEmail(e.target.value)
