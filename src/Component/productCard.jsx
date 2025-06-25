@@ -28,19 +28,30 @@ export default function ProductCard({ item }) {
   showStatus={false}
   className="w-full h-48"
 >
-  {item.image?.map((imgUrl, index) => (
+  {item.image && item.image.length > 0 ? (
+  item.image.map((imgUrl, index) => (
     <div key={index}>
       <img
-        src={imgUrl || "/emp.jpeg"}
+        src={imgUrl || "../../public/emp.jpeg"}
         alt={`${item.name}-${index}`}
         className="w-full h-48 object-cover"
         onError={(e) => {
           e.target.onerror = null;
-          e.target.src = "/emp.jpeg";
+          e.target.src = '../../public/emp.jpeg';
         }}
       />
     </div>
-  ))}
+  ))
+) : (
+  <div>
+    <img
+      src="../../public/emp.jpeg"
+      alt={`${item.name}-default`}
+      className="w-full h-48 object-cover"
+    />
+  </div>
+)}
+
 </Carousel>
         {/* <img
           src={item.image?.[0] || "/empty.jpg"}
