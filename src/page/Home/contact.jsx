@@ -24,7 +24,7 @@ export default function Contact() {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/inquiry`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/inquiry/`,
         {
           message: message,
         },
