@@ -2,3 +2,10 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtjZGJod2Z
 
 
 https://kcdbhwfrjlkocigvvmch.supabase.co
+
+
+Client ID- 317857477878-kpbfnslu10ler5is7muma64earhftqk6.apps.googleusercontent.com
+
+Client secrect = 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
+
+more need = eaaq lecz yjxm utfx

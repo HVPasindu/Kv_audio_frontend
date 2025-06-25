@@ -31,12 +31,12 @@ export default function ProductCard({ item }) {
   {item.image?.map((imgUrl, index) => (
     <div key={index}>
       <img
-        src={imgUrl || "/empty.jpg"}
+        src={imgUrl || "/emp.jpeg"}
         alt={`${item.name}-${index}`}
         className="w-full h-48 object-cover"
         onError={(e) => {
           e.target.onerror = null;
-          e.target.src = "/empty.jpg";
+          e.target.src = "/emp.jpeg";
         }}
       />
     </div>

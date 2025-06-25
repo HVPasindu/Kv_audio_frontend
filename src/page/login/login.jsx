@@ -3,10 +3,34 @@ import"./login.css"
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useGoogleLogin } from "@react-oauth/google";
 export default function LoginPage(){
     const [email,setEmail] = useState("");
     const [password,setPassword]=useState("");
     const navigate=useNavigate();
+    const googleLogin = useGoogleLogin(
+        {
+      onSuccess : (res)=>{
+        console.log(res)
+         axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/google`,{
+           accessToken : res.access_token
+         }).then((res)=>{
+          console.log(res)
+          toast.success("Login Success")
+          const user = res.data.user
+          localStorage.setItem("token",res.data.token)
+         if(user.role === "admin"){
+            navigate("/admin/")
+          }else{
+             navigate("/")
+           }
+         }).catch((err)=>{
+         console.log(err)
+         })
+      }
+    }
+    );
+
 
     function login(){
         console.log(email,password);
@@ -19,6 +43,10 @@ export default function LoginPage(){
             toast.success("Login Success")
             const user=res.data.user;
             localStorage.setItem("token",res.data.token);
+            if(user.emailVerified==false){
+              navigate("/verify-email")
+              return
+            }
             if(user.role=="admin"){
                 navigate("/admin/")
             }else{
@@ -43,7 +71,7 @@ export default function LoginPage(){
 
     return(
     <div className="w-full h-screen bg-picture flex justify-center items-center">
-        <div className="w-[400px] h-[400px] backdrop-blur-sm rounded-2xl flex flex-col items-center   ">
+        <div className="w-[400px] h-[500px] backdrop-blur-sm rounded-2xl flex flex-col items-center relative  ">
             <img src="/kv_logo.png" alt="logo" className="w-[200px] h-[200px] object-cover "/>
 
             <input type="email" placeholder="Email" className="mt-6 w-[300px] h-[50px] bg-transparent border-b-2 border-white text-white text-2xl outline-none " onChange={(e)=>{
@@ -58,6 +86,9 @@ export default function LoginPage(){
             <button className="w-[300px] h-[50px] text-2xl text-white rounded-lg bg-[#efac38] my-8" onClick={login}>
                 Login
             </button>
+            <div className="w-[300px] h-[50px] text-2xl text-white rounded-lg bg-[#efac38] my-8 text-center " onClick={googleLogin}>
+                Login with Google
+            </div>
         </div>
      </div>)
 }
