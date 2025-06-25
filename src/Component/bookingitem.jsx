@@ -55,11 +55,11 @@ export default function BookingItem({ itemKey, qty, refresh }) {
         <div className="flex flex-row justify-between items-center mt-2">
           <span className="text-[var(--color-highlight)] font-bold">Rs. {item.price.toFixed(2)}</span>
           <p className="relative">Qty:
-            <button className="absolute top-[-20px] hover:text-accent" onClick={()=>{
+            <button className="absolute top-[-10px] left-[30px] hover:text-accent" onClick={()=>{
                 addToCart(itemKey,1);
                 refresh();
             }}> <FaArrowUp/> </button> {qty}
-            <button className="absolute bottom-[-20px] left-[30px] hover:text-accent" onClick={()=>{
+            <button className="absolute bottom-[-15px] left-[30px] hover:text-accent" onClick={()=>{
                 
                     if(qty==1){
                         removeFromeCart(itemKey);

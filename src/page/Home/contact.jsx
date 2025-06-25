@@ -1,108 +1,135 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const [message, setMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+  
+  const handleMessageChange = (event) => {
+    setMessage(event.target.value);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // For now, just log the form data
-    console.log("Form submitted", formData);
-    alert("Thank you for contacting us!");
-    setFormData({ name: "", email: "", message: "" });
+  
+  const handleSendMessage = async () => {
+    if (!message) {
+      toast.error('Please enter a message before submitting.'); 
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/inquiry`,
+        {
+          message: message,
+        },
+        {
+          headers: {
+            Authorization: 'Bearer ' + token,
+          },
+        }
+      );
+
+     
+      if (response.data.success) {
+        
+        toast.success(response.data.message || 'Your inquiry has been sent successfully!');
+      } else {
+        
+        toast.error(response.data.message || 'Failed to send your inquiry. Please try again.');
+      }
+
+      setMessage(''); 
+    } catch (err) {
+     
+      toast.error(err?.response?.data?.message || 'An error occurred during submission.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <div className="min-h-screen bg-primary py-16">
-      <div className="container mx-auto px-4 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold text-accent mb-8">
-          Contact Us
-        </h1>
-        <p className="text-lg md:text-xl text-secondary mb-8">
-          Have a question or need help? We're here to assist you.
-        </p>
-
-        {/* Contact Form */}
-        <div className="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-lg">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label htmlFor="name" className="block text-left text-lg font-semibold text-accent mb-2">
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="email" className="block text-left text-lg font-semibold text-accent mb-2">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="message" className="block text-left text-lg font-semibold text-accent mb-2">
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleInputChange}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
-                rows="4"
-                required
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full bg-highlight hover:bg-red-600 text-blue-900 font-semibold py-3 px-8 rounded-full shadow transition"
-            >
-              Send Message
-            </button>
-          </form>
+    <div className="bg-gradient-to-r from-blue-100 to-blue-200 min-h-screen flex flex-col">
+      
+      <header className="p-6 bg-primary text-white flex justify-between items-center">
+        <div className="text-2xl font-bold">
+          <span className="text-accent">KV Audio</span>
         </div>
-      </div>
-
-      {/* Footer Section */}
-      <div className="text-center mt-16">
-        <p className="text-lg text-secondary">
-          Or reach out to us through our social media channels.
-        </p>
-        <div className="mt-4">
-          <Link to="/gallery" className="text-accent hover:underline mx-2">
-            Gallery
-          </Link>
-          <Link to="/" className="text-accent hover:underline mx-2">
-            Home
-          </Link>
+       
+        <div className="md:hidden flex items-center">
+          <button className="text-white">
+            <i className="fas fa-bars"></i>
+          </button>
         </div>
-      </div>
+      </header>
+
+      
+      <section className="flex flex-col md:flex-row justify-center gap-12 px-6 py-12">
+        <div className="w-full md:w-1/2 max-w-md bg-white p-6 rounded-lg shadow-lg">
+          <h2 className="text-2xl font-bold text-accent mb-4">Get In Touch</h2>
+          <div className="text-gray-700 space-y-2">
+            <div>
+              <strong>Phone:</strong> 078-45454745
+            </div>
+            <div>
+              <strong>Email:</strong> hvpmjayarathna@gmil.com
+            </div>
+            <div>
+              <strong>Location:</strong> Audio Street, Kalutara District, 10001
+            </div>
+            <div>
+              <strong>Business Hours:</strong> Mon - Fri: 9:00 AM - 6:00 PM
+              <br />
+              Sat: 10 AM - 4 PM
+            </div>
+          </div>
+        </div>
+
+       
+        <div className="w-full md:w-1/2 max-w-md bg-white p-6 rounded-lg shadow-lg">
+          <h2 className="text-2xl font-bold text-accent mb-4">Send Us a Message</h2>
+
+         
+          <textarea
+            className="w-full p-4 border rounded-lg mb-4 text-gray-700"
+            rows="6"
+            value={message}
+            onChange={handleMessageChange}
+            placeholder="Your Message"
+          />
+
+         
+          <button
+            onClick={handleSendMessage}
+            className="w-full bg-accent text-white p-4 rounded-lg hover:bg-blue-600"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? 'Sending...' : 'Send Message'}
+          </button>
+        </div>
+      </section>
+
+      
+      <section className="bg-primary py-12 text-center">
+        <p className="text-xl font-semibold text-gray-700 mb-4">Share Your Experience</p>
+        <p className="text-gray-700 mb-4">We value your feedback! Leave a review about our services.</p>
+        <a href="#" className="bg-accent text-white py-3 px-6 rounded-full">
+          Write a Review
+        </a>
+      </section>
+
+      
+      <footer className="bg-accent text-white p-4 text-center">
+        <p>&copy; 2025 KV Audio. All rights reserved.</p>
+      </footer>
+
+      
+      <ToastContainer />
     </div>
   );
 }

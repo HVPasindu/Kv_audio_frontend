@@ -37,6 +37,14 @@ export default function Header(){
                     }}>
                         Logout
                 </button>}
+                {token==null && <button className="hidden md:block absolute right-5 text-[24px]" onClick={()=>{
+                        
+                         window.location.href = "/login"
+                    }}>
+                        Login
+                </button>}
+
+                
                 <MobileNavPanel isOpen={navPanelOpen} setOpen={setnavPanelOpen}/>
          </header>
     )

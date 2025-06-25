@@ -74,7 +74,7 @@ export default function BookingPage() {
         setCart(loadCart());
     }).catch((err)=>{
         console.error(err);
-        toast.error("Failed to create booking")
+        toast.error(err.response.data.message)
         
     })
   }
@@ -109,7 +109,7 @@ export default function BookingPage() {
         </div>
       </div>
 
-      <div className="w-full flex flex-col items-center">
+      <div className="w-full flex flex-col items-center ">
         {cart.orderedItems.map((item) => (
           <BookingItem
             key={item.key}
