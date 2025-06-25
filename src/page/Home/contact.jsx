@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify'; 
 import 'react-toastify/dist/ReactToastify.css'; 
+import { Link } from 'react-router-dom';
 
 export default function Contact() {
   const [message, setMessage] = useState('');
@@ -118,9 +119,9 @@ export default function Contact() {
       <section className="bg-primary py-12 text-center">
         <p className="text-xl font-semibold text-gray-700 mb-4">Share Your Experience</p>
         <p className="text-gray-700 mb-4">We value your feedback! Leave a review about our services.</p>
-        <a href="#" className="bg-accent text-white py-3 px-6 rounded-full">
+        <Link to="/review" className="bg-accent text-white py-3 px-6 rounded-full">
           Write a Review
-        </a>
+        </Link>
       </section>
 
       

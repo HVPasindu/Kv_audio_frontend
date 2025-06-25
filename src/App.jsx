@@ -10,6 +10,7 @@ import RegisterPage from './page/register/register';
 import Testing from './Component/testing';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import VerifyEmail from './page/verifyEmail/verifyEmail';
+import Review from './page/Home/review';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/login" element={<LoginPage/>}/>
           <Route path="/register" element={<RegisterPage/>}/>
           <Route path="/verify-email" element={<VerifyEmail/>}/>
+          
           
           <Route path="/testing" element={<Testing/>}/>
        
