@@ -10,6 +10,7 @@ import ProductOverview from "./productOverview";
 import BookingPage from "./bookingPage";
 import Review from "./review";
 import UpdatedReview from "./reviewupdate";
+import ReviewPage from "./review";
 
 export default function HomePage(){
     return(
@@ -24,7 +25,7 @@ export default function HomePage(){
                     <Route path="/product/:key" element={<ProductOverview/>}/>
                     <Route path="/" element={<Home/>}/>
                     <Route path="/*" element={<Errorss/>}/>
-                    <Route path="/review" element={<Review/>}/>
+                    <Route path="/review" element={<ReviewPage/>}/>
                     <Route path="/reviewUpdate" element={<UpdatedReview/>}/>
                     
 

@@ -49,7 +49,7 @@ const UpdateReview = () => {
         navigate("/review"); // Navigate back to the admin review page or list
       })
       .catch((error) => {
-        toast.error('Failed to update review.');
+        toast.error(error?.response?.data?.message ||'Failed to update review.');
         console.error(error);
       });
   };
