@@ -1,11 +1,13 @@
 import { CiHome, CiSpeaker } from "react-icons/ci";
-import { IoMdClose } from "react-icons/io";
+import { IoIosLogIn, IoIosLogOut, IoMdClose } from "react-icons/io";
 import { MdPhotoLibrary, MdContacts, MdInfoOutline, MdOutlineSpeaker } from "react-icons/md";
 import { FaRegBookmark, FaRegCalendarCheck, FaRegUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { BsGraphDown } from "react-icons/bs";
+import { GoCodeReview } from "react-icons/go";
 
 export default function MobileNavPaneladmin(props) {
+  const token = localStorage.getItem("token")
   const isOpen = props.isOpen;
   const setOpen = props.setOpen;
   const navigate = useNavigate();
@@ -77,26 +79,36 @@ export default function MobileNavPaneladmin(props) {
               Users
             </div>
 
-            {/* Additional links (uncomment if needed) */}
-            {/* <div
+           <div
               onClick={() => {
-                goTo("/contact");
+                goTo("/admin//reviews");
               }}
               className="text-[20px] text-accent m-1 p-2 flex items-center gap-2 cursor-pointer hover:bg-accent/10 rounded-md"
             >
-              <MdContacts className="text-2xl" />
-              Contact
+              <GoCodeReview className="text-2xl" />
+              Reviews
             </div>
+            {token!=null && <div
+                          onClick={() => {
+                             localStorage.removeItem("token")
+                                        window.location.href = "/login"
+                          }}
+                          className="text-[20px] text-accent m-1 p-2 flex items-center gap-2 cursor-pointer hover:bg-accent/10 rounded-md"
+                        >
+                          <IoIosLogOut className="text-2xl" />
+                          Logout
+                        </div>}
+                        {token==null && <div
+                          onClick={() => {
+                             window.location.href = "/login"
+                          }}
+                          className="text-[20px] text-accent m-1 p-2 flex items-center gap-2 cursor-pointer hover:bg-accent/10 rounded-md"
+                        >
+                          <IoIosLogIn className="text-2xl" />
+                          Login
+                        </div>}
+            
 
-            <div
-              onClick={() => {
-                goTo("/about");
-              }}
-              className="text-[20px] text-accent m-1 p-2 flex items-center gap-2 cursor-pointer hover:bg-accent/10 rounded-md"
-            >
-              <MdInfoOutline className="text-2xl" />
-              About
-            </div> */}
           </div>
         </div>
       )}

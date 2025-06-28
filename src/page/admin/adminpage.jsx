@@ -13,11 +13,15 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { GiHamburgerMenu } from "react-icons/gi";
 import MobileNavPaneladmin from "./MobileNavPaneladmin";
+import ReviwConroller from "./admine_review";
+import { GoCodeReview } from "react-icons/go";
+import { IoIosLogIn, IoIosLogOut } from "react-icons/io";
 
 
 export default function Adminpage(){
   const [userValidated,setUserValidated]=useState(false);
   const [navPanelOpen,setnavPanelOpen]=useState(false);
+  const token = localStorage.getItem("token")
   useEffect(()=>{
     const token = localStorage.getItem("token");
     if(!token){
@@ -62,7 +66,24 @@ export default function Adminpage(){
             <FaRegUser/>
             Users
           </Link>
-          
+           <Link to="/admin/reviews" className='w-full h-[40px] text-[25px] font-bold flex justify-center items-center'>
+            <GoCodeReview/>
+            Reviews
+          </Link>
+          {token!=null && <button  className='w-full h-[40px] text-[25px] font-bold flex justify-center items-center' onClick={()=>{
+                        localStorage.removeItem("token")
+                         window.location.href = "/login"
+                    }}>
+                        <IoIosLogOut className="text-2xl" />
+                        Logout
+                </button>}
+          {token==null && <button className='w-full h-[40px] text-[25px] font-bold flex justify-center items-center' onClick={()=>{
+                        
+                         window.location.href = "/login"
+                    }}>
+                        <IoIosLogIn className="text-2xl" />
+                        Login
+                </button>}
 
         </div>
         <div className="w-full h-[70px] shadow-xl flex justify-center items-center relative bg-accent text-white md:hidden "  >
@@ -80,6 +101,7 @@ export default function Adminpage(){
                 <Route path="/items" element={<AdminItempage/>}/>
                 <Route path="/item/add" element={<Additempage/>}/>
                 <Route path="/item/edit" element={<UpdateItemPage/>}/>
+                <Route path="/reviews" element={<ReviwConroller/>}/>
             </Routes>}
 
         </div>
