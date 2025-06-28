@@ -1,10 +1,11 @@
 import { CiHome, CiSpeaker } from "react-icons/ci";
-import { IoMdClose } from "react-icons/io";
+import { IoIosLogIn, IoIosLogOut, IoMdClose } from "react-icons/io";
 import { MdPhotoLibrary, MdContacts, MdInfoOutline } from "react-icons/md";
 import { FaRegCalendarCheck } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 export default function MobileNavPanel(props) {
+	const token = localStorage.getItem("token")
 	const isOpen = props.isOpen;
 	const setOpen = props.setOpen;
 	const navigate = useNavigate();
@@ -93,9 +94,31 @@ export default function MobileNavPanel(props) {
 							<MdInfoOutline className="text-2xl" />
 							About
 						</div>
+						{token!=null && <div
+							onClick={() => {
+								 localStorage.removeItem("token")
+                         		window.location.href = "/login"
+							}}
+							className="text-[20px] text-accent m-1 p-2 flex items-center gap-2 cursor-pointer hover:bg-accent/10 rounded-md"
+						>
+							<IoIosLogOut className="text-2xl" />
+							Logout
+						</div>}
+						{token==null && <div
+							onClick={() => {
+								 window.location.href = "/login"
+							}}
+							className="text-[20px] text-accent m-1 p-2 flex items-center gap-2 cursor-pointer hover:bg-accent/10 rounded-md"
+						>
+							<IoIosLogIn className="text-2xl" />
+							Login
+						</div>}
+
+
 					</div>
 				</div>
 			)}
 		</>
 	);
 }
+//jkfd
