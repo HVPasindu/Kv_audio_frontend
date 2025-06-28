@@ -11,10 +11,13 @@ import AdminUserssPage from "./adminUsersPage";
 import AdminOrdersPage from "./adminorderspage";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { GiHamburgerMenu } from "react-icons/gi";
+import MobileNavPaneladmin from "./MobileNavPaneladmin";
 
 
 export default function Adminpage(){
   const [userValidated,setUserValidated]=useState(false);
+  const [navPanelOpen,setnavPanelOpen]=useState(false);
   useEffect(()=>{
     const token = localStorage.getItem("token");
     if(!token){
@@ -42,7 +45,7 @@ export default function Adminpage(){
   },[])
     return(
         <div className='h-screen w-full flex'>
-        <div className='w-[400px] h-full bg-accent'>
+        <div className='w-[400px] h-full bg-accent hidden  md:block'>
           <Link to="/admin/dashboard" className='w-full h-[40px] text-[25px] font-bold flex justify-center items-center'>
             <BsGraphDown/>
             Dashboard
@@ -59,8 +62,17 @@ export default function Adminpage(){
             <FaRegUser/>
             Users
           </Link>
+          
 
         </div>
+        <div className="w-full h-[70px] shadow-xl flex justify-center items-center relative bg-accent text-white md:hidden "  >
+          <img src="/kv_logo.png" alt="logo" className="w-[60px] h-[60px] object-cover border-[3px] bg-amber-100 items-center absolute left-1 rounded-full"/>
+         
+        <GiHamburgerMenu className="absolute right-5 text-[24px] md:hidden " onClick={()=>{
+                              setnavPanelOpen(true)
+                          }}/>
+        </div >
+         <MobileNavPaneladmin isOpen={navPanelOpen} setOpen={setnavPanelOpen}/>                 
         <div className='w-[calc(100vw-400px)] bg-primary'>
           {userValidated &&  <Routes path="/*" >
                 <Route path="/orders" element={<AdminOrdersPage/>}/>
