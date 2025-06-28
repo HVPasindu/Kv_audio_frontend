@@ -1,4 +1,4 @@
-import { CiHome, CiSpeaker } from "react-icons/ci";
+
 import { IoIosLogIn, IoIosLogOut, IoMdClose } from "react-icons/io";
 import { MdPhotoLibrary, MdContacts, MdInfoOutline, MdOutlineSpeaker } from "react-icons/md";
 import { FaRegBookmark, FaRegCalendarCheck, FaRegUser } from "react-icons/fa";

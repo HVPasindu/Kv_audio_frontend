@@ -15,7 +15,8 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import ReviwConroller from "./admine_review";
 import { GoCodeReview, GoHome } from "react-icons/go";
 import { IoIosLogIn, IoIosLogOut } from "react-icons/io";
-import MobileNavPaneladmin from "./MobileNavPaneladmin";
+import MobileNavPaneladmin from "./navpaneladmin";
+
 
 
 export default function Adminpage(){
