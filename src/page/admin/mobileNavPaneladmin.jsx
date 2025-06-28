@@ -4,7 +4,7 @@ import { MdPhotoLibrary, MdContacts, MdInfoOutline, MdOutlineSpeaker } from "rea
 import { FaRegBookmark, FaRegCalendarCheck, FaRegUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { BsGraphDown } from "react-icons/bs";
-import { GoCodeReview } from "react-icons/go";
+import { GoCodeReview, GoHome } from "react-icons/go";
 
 export default function MobileNavPaneladmin(props) {
   const token = localStorage.getItem("token")
@@ -87,6 +87,15 @@ export default function MobileNavPaneladmin(props) {
             >
               <GoCodeReview className="text-2xl" />
               Reviews
+            </div>
+            <div
+              onClick={() => {
+                goTo("/");
+              }}
+              className="text-[20px] text-accent m-1 p-2 flex items-center gap-2 cursor-pointer hover:bg-accent/10 rounded-md"
+            >
+              <GoHome className="text-2xl" />
+              GoHome
             </div>
             {token!=null && <div
                           onClick={() => {
