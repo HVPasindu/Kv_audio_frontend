@@ -1,12 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaCartShopping } from "react-icons/fa6";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import MobileNavPanel from "./mobileNavPanel";
+import axios from "axios";
 
 export default function Header(){
     const [navPanelOpen,setnavPanelOpen]=useState(false);
     const token = localStorage.getItem("token")
+    const [isAdmin,setisAdmin]=useState(false);
+
+    useEffect(() => {
+    if (token) {
+        axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/admincheck`,{}, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((res) => {
+            setisAdmin(res.data.isAdmin);
+        })
+        .catch((err) => {
+            console.error(err); 
+        });
+    }
+}, [token]);
+
     return(
          <header className="w-full h-[70px] shadow-xl flex justify-center items-center relative bg-accent text-white">
                 <img src="/kv_logo.png" alt="logo" className="w-[60px] h-[60px] object-cover border-[3px] bg-amber-100 items-center absolute left-1 rounded-full"/>
@@ -23,6 +42,8 @@ export default function Header(){
                 <Link to="/items" className="text-[22px] m-1 hidden md:block">
                     Items
                 </Link>
+                {isAdmin && <Link to='/admin/*' className="text-[22px] m-1 hidden md:block">AdminPage</Link>}
+
                 <Link to="/booking" className="text-[22px]  m-1 absolute right-24 hidden md:block">
                     <FaCartShopping/>
                 </Link>
