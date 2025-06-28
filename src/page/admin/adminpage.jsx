@@ -13,9 +13,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { GiHamburgerMenu } from "react-icons/gi";
 import ReviwConroller from "./admine_review";
-import { GoCodeReview } from "react-icons/go";
+import { GoCodeReview, GoHome } from "react-icons/go";
 import { IoIosLogIn, IoIosLogOut } from "react-icons/io";
-import MobileNavPaneladmin from "./mobileNavPaneladmin";
+import MobileNavPaneladmin from "./MobileNavPaneladmin";
+
 
 export default function Adminpage(){
   const [userValidated,setUserValidated]=useState(false);
@@ -68,6 +69,10 @@ export default function Adminpage(){
            <Link to="/admin/reviews" className='w-full h-[40px] text-[25px] font-bold flex justify-center items-center'>
             <GoCodeReview/>
             Reviews
+          </Link>
+           <Link to="/" className='w-full h-[40px] text-[25px] font-bold flex justify-center items-center'>
+            <GoHome/>
+            GoHome
           </Link>
           {token!=null && <button  className='w-full h-[40px] text-[25px] font-bold flex justify-center items-center' onClick={()=>{
                         localStorage.removeItem("token")
