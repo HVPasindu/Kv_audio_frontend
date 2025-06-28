@@ -39,7 +39,7 @@ export default function RegisterPage() {
         <img
           src="/kv_logo.png"
           alt="logo"
-          className="w-[150px] h-[150px] object-cover"
+          className=" object-cover mb-6 bg-amber-100  rounded-full mx-auto w-[80px] h-[80px] border-[3px]"
         />
 
         <input
@@ -82,6 +82,13 @@ export default function RegisterPage() {
 
         <button className="w-[300px] h-[45px] text-xl text-white rounded-lg bg-[#efac38] mt-6" onClick={handleOnSubmit}>
           Register
+        </button>
+         
+        <button
+          className="mt-4 text-white bg-blue-600 hover:bg-blue-700 w-[300px] h-[45px] rounded-lg"
+          onClick={() => navigate("/login")}
+        >
+          Go to Login Page
         </button>
       </div>
     </div>

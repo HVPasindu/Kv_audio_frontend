@@ -77,7 +77,7 @@ export default function LoginPage() {
         <img
           src="/kv_logo.png"
           alt="logo"
-          className="w-[150px] h-[150px] object-cover mb-6"
+          className=" object-cover mb-6 bg-amber-100  rounded-full mx-auto w-[80px] h-[80px] border-[3px]"
         />
         <h2 className="text-2xl text-white font-semibold mb-6">Login to Your Account</h2>
 
