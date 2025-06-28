@@ -12,7 +12,7 @@ import AdminOrdersPage from "./adminorderspage";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { GiHamburgerMenu } from "react-icons/gi";
-import MobileNavPaneladmin from "./MobileNavPaneladmin";
+import MobileNavPaneladmin from "./mobileNavPaneladmin";
 import ReviwConroller from "./admine_review";
 import { GoCodeReview } from "react-icons/go";
 import { IoIosLogIn, IoIosLogOut } from "react-icons/io";
