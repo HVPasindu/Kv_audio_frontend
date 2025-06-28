@@ -42,7 +42,7 @@ export default function Header(){
                 <Link to="/items" className="text-[22px] m-1 hidden md:block">
                     Items
                 </Link>
-                {isAdmin && <Link to='/admin/' className="text-[22px] m-1 hidden md:block">AdminPage</Link>}
+                {isAdmin && <Link to='/admin/dashboard' className="text-[22px] m-1 hidden md:block">AdminPage</Link>}
 
                 <Link to="/booking" className="text-[22px]  m-1 absolute right-24 hidden md:block">
                     <FaCartShopping/>

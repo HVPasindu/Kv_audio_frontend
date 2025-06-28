@@ -16,6 +16,8 @@ import { IoIosLogIn, IoIosLogOut } from "react-icons/io";
 import MobileNavPaneladmin from "./navpaneladmin";
 import ReviewController from "./admine_review";
 import AdminDashboard from "./admindashboard";
+import { FiMessageSquare } from "react-icons/fi";
+import AdminMessage from "./adminmessage";
 
 export default function AdminPage() {
   const [userValidated, setUserValidated] = useState(false);
@@ -90,6 +92,13 @@ export default function AdminPage() {
             <GoCodeReview />
             <span>Reviews</span>
           </Link>
+           <Link
+            to="/admin/message"
+            className="flex items-center space-x-2 text-black text-lg font-medium hover:bg-yellow-500 rounded-lg px-4 py-2"
+          >
+            <FiMessageSquare />
+            <span>Message</span>
+          </Link>
           <Link
             to="/"
             className="flex items-center space-x-2 text-black text-lg font-medium hover:bg-yellow-500 rounded-lg px-4 py-2"
@@ -152,6 +161,8 @@ export default function AdminPage() {
             <Route path="/item/edit" element={<UpdateItemPage />} />
             <Route path="/reviews" element={<ReviewController />} />
             <Route path="/dashboard" element={<AdminDashboard/>}/>
+            <Route path="/message" element={<AdminMessage/>}/>
+
           </Routes>
         )}
       </div>
