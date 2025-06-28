@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 export default function ProductCard({ item }) {
   return (
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden w-full max-w-sm hover:shadow-xl transition duration-300 flex flex-col justify-between">
+    <div className="bg-white rounded-xl shadow-lg overflow-hidden w-full max-w-sm hover:shadow-xl transition duration-300 flex flex-col justify-between m-5">
       {/* Product Image */}
       {/* {item.image?.map((imgUrl, index) => (
       <img
