@@ -3,12 +3,33 @@ import { IoIosLogIn, IoIosLogOut, IoMdClose } from "react-icons/io";
 import { MdPhotoLibrary, MdContacts, MdInfoOutline } from "react-icons/md";
 import { FaRegCalendarCheck } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { GrUserAdmin } from "react-icons/gr";
 
 export default function MobileNavPanel(props) {
 	const token = localStorage.getItem("token")
 	const isOpen = props.isOpen;
 	const setOpen = props.setOpen;
 	const navigate = useNavigate();
+
+	const [isAdmin,setisAdmin]=useState(false);
+	
+		useEffect(() => {
+		if (token) {
+			axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/admincheck`,{}, {
+				headers: {
+					Authorization: `Bearer ${token}`
+				}
+			})
+			.then((res) => {
+				setisAdmin(res.data.isAdmin);
+			})
+			.catch((err) => {
+				console.error(err); 
+			});
+		}
+	}, [token]);
 
 	function goTo(route) {
 		navigate(route);
@@ -94,6 +115,15 @@ export default function MobileNavPanel(props) {
 							<MdInfoOutline className="text-2xl" />
 							About
 						</div>
+						{isAdmin&&<div
+							onClick={() => {
+								goTo('/admin/*');
+							}}
+							className="text-[20px] text-accent m-1 p-2 flex items-center gap-2 cursor-pointer hover:bg-accent/10 rounded-md"
+						>
+							<GrUserAdmin className="text-2xl" />
+							AdminPage
+						</div>}
 						{token!=null && <div
 							onClick={() => {
 								 localStorage.removeItem("token")
