@@ -10,10 +10,11 @@ import AdminOrdersPage from "./adminorderspage";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { GiHamburgerMenu } from "react-icons/gi";
-import ReviwConroller from "./admine_review";
+
 import { GoCodeReview, GoHome } from "react-icons/go";
 import { IoIosLogIn, IoIosLogOut } from "react-icons/io";
 import MobileNavPaneladmin from "./navpaneladmin";
+import ReviewController from "./admine_review";
 
 export default function AdminPage() {
   const [userValidated, setUserValidated] = useState(false);
@@ -124,7 +125,7 @@ export default function AdminPage() {
       {/* Mobile Nav */}
       <div className="w-full h-[70px] shadow-xl flex justify-between items-center relative bg-accent text-white md:hidden">
         <GiHamburgerMenu
-          className="absolute left-5 text-3xl cursor-pointer"
+          className="absolute right-5 text-[24px] md:hidden "
           onClick={() => {
             setNavPanelOpen(true);
           }}
@@ -132,7 +133,7 @@ export default function AdminPage() {
         <img
           src="/kv_logo.png"
           alt="Logo"
-          className="w-[60px] h-[60px] object-cover rounded-full mx-auto"
+          className="w-[60px] h-[60px] object-cover border-[3px] bg-amber-100 items-center absolute left-1 rounded-full"
         />
       </div>
 
@@ -148,7 +149,7 @@ export default function AdminPage() {
             <Route path="/items" element={<AdminItempage />} />
             <Route path="/item/add" element={<Additempage />} />
             <Route path="/item/edit" element={<UpdateItemPage />} />
-            <Route path="/reviews" element={<ReviwConroller />} />
+            <Route path="/reviews" element={<ReviewController />} />
           </Routes>
         )}
       </div>
