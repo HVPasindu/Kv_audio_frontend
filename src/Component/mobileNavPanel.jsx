@@ -106,7 +106,7 @@ export default function MobileNavPanel(props) {
 							Contact
 						</div>
 
-						<div
+						{/* <div
 							onClick={() => {
 								goTo("/about");
 							}}
@@ -114,7 +114,7 @@ export default function MobileNavPanel(props) {
 						>
 							<MdInfoOutline className="text-2xl" />
 							About
-						</div>
+						</div> */}
 						{isAdmin&&<div
 							onClick={() => {
 								goTo('/admin/');
