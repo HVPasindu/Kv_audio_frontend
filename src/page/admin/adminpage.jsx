@@ -15,6 +15,7 @@ import { GoCodeReview, GoHome } from "react-icons/go";
 import { IoIosLogIn, IoIosLogOut } from "react-icons/io";
 import MobileNavPaneladmin from "./navpaneladmin";
 import ReviewController from "./admine_review";
+import AdminDashboard from "./admindashboard";
 
 export default function AdminPage() {
   const [userValidated, setUserValidated] = useState(false);
@@ -150,6 +151,7 @@ export default function AdminPage() {
             <Route path="/item/add" element={<Additempage />} />
             <Route path="/item/edit" element={<UpdateItemPage />} />
             <Route path="/reviews" element={<ReviewController />} />
+            <Route path="/dashboard" element={<AdminDashboard/>}/>
           </Routes>
         )}
       </div>

@@ -49,7 +49,7 @@ export default function AdminUserssPage() {
 
   return (
     <div className="w-full p-6">
-      <h1 className="text-2xl font-bold mb-6">Admin Users Page</h1>
+      <h1 className="text-2xl font-bold mb-6 text-accent">Admin Users Page</h1>
 
       {loading ? (
         <p>Loading users...</p>
