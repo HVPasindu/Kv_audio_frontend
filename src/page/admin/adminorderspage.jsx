@@ -9,7 +9,7 @@ export default function AdminOrdersPage() {
   const [modalOpened, setModalOpened] = useState(false);
 
   useEffect(() => {
-    const fetchOrders = async () => { // Renamed from fetchUsers to fetchOrders to avoid confusion
+    const fetchOrders = async () => {
       try {
         const token = localStorage.getItem("token");
         const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/orders`, {
@@ -19,7 +19,7 @@ export default function AdminOrdersPage() {
         });
         setOrders(res.data);
       } catch (error) {
-        console.error("Error fetching orders:", error); // Fixed error message to reflect 'orders'
+        console.error("Error fetching orders:", error); 
       } finally {
         setLoading(false);
       }
@@ -30,59 +30,68 @@ export default function AdminOrdersPage() {
   }, [loading]);
 
   function handleOrderStatusChange(orderId, status) {
-        const token = localStorage.getItem("token");
-        
-        axios.put(
-            `${import.meta.env.VITE_BACKEND_URL}/api/orders/status/${orderId}`,
-            {
-                status: status,
-            },
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            }
-        ).then(()=>{
-            console.log("Order status updated");
-            setModalOpened(false);
-            setLoading(true);
-        }).catch((err)=>{
-            console.error(err);
-            setLoading(true);
-        })
-    }
+    const token = localStorage.getItem("token");
 
+    axios
+      .put(
+        `${import.meta.env.VITE_BACKEND_URL}/api/orders/status/${orderId}`,
+        {
+          status: status,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then(() => {
+        setModalOpened(false);
+        setLoading(true);
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(true);
+      });
+  }
 
   return (
-    <div className="w-full h-full flex flex-col items-center">
-      <h1 className="text-2xl font-bold mb-6">Admin Orders Page</h1>
+    <div className="w-full h-full flex flex-col items-center py-6 px-4 md:px-10">
+      <h1 className="text-3xl font-semibold mb-6 text-accent">Manage Orders</h1>
 
       {loading ? (
-        <p>Loading orders...</p>
+        <div className="flex justify-center items-center text-lg text-gray-600">
+          <div className="animate-spin h-8 w-8 border-t-2 border-accent rounded-full"></div>
+          <span className="ml-2">Loading orders...</span>
+        </div>
       ) : (
-        <div className="overflow-x-auto w-full max-w-5xl">
-          <table className="min-w-full bg-white border border-gray-300 shadow-md rounded-lg">
+        <div className="overflow-x-auto w-full max-w-7xl">
+          <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
             <thead>
-              	<tr className="bg-gray-100">
+              <tr className="bg-accent text-white">
                 <th className="p-3 text-left">Order ID</th>
                 <th className="p-3 text-left">Email</th>
                 <th className="p-3 text-left">Order Date</th>
                 <th className="p-3 text-left">Start Date</th>
                 <th className="p-3 text-left">End Date</th>
-                <th className="p-3 text-left">Days</th> 
                 <th className="p-3 text-left">Total Amount</th>
                 <th className="p-3 text-left">Status</th>
               </tr>
             </thead>
             <tbody>
-              {orders.map((order) =>(
-                <tr key={order._id} className="border-t cursor-pointer" onClick={() => {setActiveOrder(order);setModalOpened(true);}}>
+              {orders.map((order) => (
+                <tr
+                  key={order._id}
+                  className="border-t cursor-pointer hover:bg-gray-100"
+                  onClick={() => {
+                    setActiveOrder(order);
+                    setModalOpened(true);
+                  }}
+                >
                   <td className="p-3">{order.orderId}</td>
                   <td className="p-3">{order.email}</td>
                   <td className="p-3">{new Date(order.orderDate).toLocaleString()}</td>
                   <td className="p-3">{new Date(order.startingDate).toLocaleDateString()}</td>
                   <td className="p-3">{new Date(order.endingDate).toLocaleDateString()}</td>
-                  <td className="p-3">{order.days}</td> 
                   <td className="p-3">{order.totalAmount ? `Rs.${order.totalAmount}` : "N/A"}</td>
                   <td className="p-3">{order.status}</td>
                 </tr>
@@ -92,93 +101,67 @@ export default function AdminOrdersPage() {
         </div>
       )}
 
-      {modalOpened && (
-				<div className="fixed top-0 left-0 w-full h-full bg-[#00000075] flex justify-center items-center">
-					<div className="w-[500px] bg-white p-4 rounded-lg shadow-lg relative">
-						 <IoMdCloseCircleOutline
-							className="absolute top-2 right-2 text-3xl cursor-pointer hover:text-red-600"
-							onClick={() => setModalOpened(false)}
-						/> 
-						<h1 className="text-2xl font-semibold mb-4">Order Details</h1>
-						<div className="flex flex-col gap-2">
-							<p>
-								<span className="font-semibold">Order ID:</span>
-								{activeOrder.orderId}
-							</p>
-							<p>
-								<span className="font-semibold">Email:</span>
-								{activeOrder.email}
-							</p>
-							<p>
-								<span className="font-semibold">Days:</span> {activeOrder.days}
-							</p>
-							<p>
-								<span className="font-semibold">Starting Date:</span>
-								{new Date(activeOrder.startingDate).toLocaleDateString()}
-							</p>
-							<p>
-								<span className="font-semibold">Ending Date:</span>
-								{new Date(activeOrder.endingDate).toLocaleDateString()}
-							</p>
-							<p>
-								<span className="font-semibold">Total Amount:</span>
-								{activeOrder.totalAmount.toFixed(2)}
-							</p>
-							<p>
-								<span className="font-semibold">Approval Status:</span>
-								{activeOrder.status}
-							</p>
-							<p>
-								<span className="font-semibold">Order Date:</span>
-								{new Date(activeOrder.orderDate).toLocaleDateString()}
-							</p>
-						</div>
-						<div className=" my-5 w-full flex justify-cener items-center">
-							<button onClick={()=>{
-                                handleOrderStatusChange(activeOrder.orderId, "approved")
-                            }} className="flex bg-green-500 text-white px-4 py-1 rounded-md">
-								Approve
-							</button>
-							<button onClick={()=>{
-                                handleOrderStatusChange(activeOrder.orderId, "Rejected")
-                            }} className="flex bg-red-500 text-white px-4 py-1 rounded-md ml-4">
-								Reject
-							</button>
-						</div>
-						<table className="w-full mt-4">
-							<thead>
-								<tr>
-									<th></th>
-									<th>Product</th>
-									<th>Qty</th>
-									<th>Price</th>
-								</tr>
-							</thead>
-							<tbody>
-								{activeOrder.orderedItems.map((item) => {
-									return (
-										<tr key={item.product.key}>
-											<td>
-												<img
-													src={item.product.image}
-													alt={item.product.name}
-													className="w-10 h-10"
-												/>
-											</td>
-											<td>{item.product.name}</td>
-											<td>{item.quantity}</td>
-											<td>{item.product.price}</td>
-										</tr>
-									);
-								})}
-							</tbody>
-						</table>
-					</div>
-				</div>
-			)}
+      {modalOpened && activeOrder && (
+        <div className="fixed top-0 left-0 w-full h-full bg-[#00000075] flex justify-center items-center">
+          <div className="w-[90%] max-w-md bg-white p-6 rounded-lg shadow-lg relative">
+            <IoMdCloseCircleOutline
+              className="absolute top-2 right-2 text-3xl cursor-pointer hover:text-red-600"
+              onClick={() => setModalOpened(false)}
+            />
+            <h1 className="text-2xl font-semibold mb-4">Order Details</h1>
+            <div className="flex flex-col gap-2 mb-6">
+              <p><span className="font-semibold">Order ID:</span> {activeOrder.orderId}</p>
+              <p><span className="font-semibold">Email:</span> {activeOrder.email}</p>
+              <p><span className="font-semibold">Days:</span> {activeOrder.days}</p>
+              <p><span className="font-semibold">Starting Date:</span> {new Date(activeOrder.startingDate).toLocaleDateString()}</p>
+              <p><span className="font-semibold">Ending Date:</span> {new Date(activeOrder.endingDate).toLocaleDateString()}</p>
+              <p><span className="font-semibold">Total Amount:</span> Rs. {activeOrder.totalAmount}</p>
+              <p><span className="font-semibold">Approval Status:</span> {activeOrder.status}</p>
+              <p><span className="font-semibold">Order Date:</span> {new Date(activeOrder.orderDate).toLocaleDateString()}</p>
+            </div>
+
+            <div className="flex justify-center gap-6 my-5">
+              <button
+                onClick={() => handleOrderStatusChange(activeOrder.orderId, "approved")}
+                className="bg-green-500 text-white py-2 px-6 rounded-md hover:bg-green-600 transition"
+              >
+                Approve
+              </button>
+              <button
+                onClick={() => handleOrderStatusChange(activeOrder.orderId, "rejected")}
+                className="bg-red-500 text-white py-2 px-6 rounded-md hover:bg-red-600 transition"
+              >
+                Reject
+              </button>
+            </div>
+
+            <table className="w-full mt-6">
+              <thead>
+                <tr>
+                  <th className="p-2 text-left">Product</th>
+                  <th className="p-2 text-left">Qty</th>
+                  <th className="p-2 text-left">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                {activeOrder.orderedItems.map((item) => (
+                  <tr key={item.product.key} className="border-t">
+                    <td className="p-2">
+                      <img
+                        src={item.product.image}
+                        alt={item.product.name}
+                        className="w-12 h-12 object-cover"
+                      />
+                    </td>
+                    <td className="p-2">{item.quantity}</td>
+                    <td className="p-2">{item.product.price}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
-
-
-
