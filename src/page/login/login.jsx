@@ -58,7 +58,7 @@ export default function LoginPage() {
           return;
         }
         if (user.role === "admin") {
-          navigate("/admin/");
+          navigate("/admin/dashboard");
         } else {
           navigate("/");
         }

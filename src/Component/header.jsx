@@ -44,7 +44,7 @@ export default function Header(){
                 </Link>
                 {isAdmin && <Link to='/admin/dashboard' className="text-[22px] m-1 hidden md:block">AdminPage</Link>}
 
-                <Link to="/booking" className="text-[22px]  m-1 absolute right-24 hidden md:block">
+                <Link to="/booking" className="text-[22px]  m-5 text-yellow-400 absolute right-24 hidden md:block">
                     <FaCartShopping/>
                 </Link>
                 </div>
