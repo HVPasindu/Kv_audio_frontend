@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { IoMdCloseCircleOutline } from "react-icons/io"; // Missing import for IoMdCloseCircleOutline
+import { IoMdCloseCircleOutline } from "react-icons/io";
 
 export default function AdminOrdersPage() {
   const [orders, setOrders] = useState([]);
@@ -19,7 +19,7 @@ export default function AdminOrdersPage() {
         });
         setOrders(res.data);
       } catch (error) {
-        console.error("Error fetching orders:", error); 
+        console.error("Error fetching orders:", error);
       } finally {
         setLoading(false);
       }
@@ -29,30 +29,21 @@ export default function AdminOrdersPage() {
     }
   }, [loading]);
 
-  function handleOrderStatusChange(orderId, status) {
+  const handleDeleteOrder = async (orderId) => {
     const token = localStorage.getItem("token");
-
-    axios
-      .put(
-        `${import.meta.env.VITE_BACKEND_URL}/api/orders/status/${orderId}`,
-        {
-          status: status,
+    try {
+      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/orders/${orderId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then(() => {
-        setModalOpened(false);
-        setLoading(true);
-      })
-      .catch((err) => {
-        console.error(err);
-        setLoading(true);
       });
-  }
+      // Refresh orders after deleting
+      setLoading(true);
+      setModalOpened(false); // Close modal after deletion
+    } catch (error) {
+      console.error("Error deleting order:", error);
+    }
+  };
 
   return (
     <div className="w-full h-full flex flex-col items-center py-6 px-4 md:px-10">
@@ -132,6 +123,12 @@ export default function AdminOrdersPage() {
                 className="bg-red-500 text-white py-2 px-6 rounded-md hover:bg-red-600 transition"
               >
                 Reject
+              </button>
+              <button
+                onClick={() => handleDeleteOrder(activeOrder.orderId)}
+                className="bg-gray-500 text-white py-2 px-6 rounded-md hover:bg-gray-600 transition"
+              >
+                Delete Order
               </button>
             </div>
 
