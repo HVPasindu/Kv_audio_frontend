@@ -18,6 +18,7 @@ import ReviewController from "./admine_review";
 import AdminDashboard from "./admindashboard";
 import { FiMessageSquare } from "react-icons/fi";
 import AdminMessage from "./adminmessage";
+import { SiGnuprivacyguard } from "react-icons/si";
 
 export default function AdminPage() {
   const [userValidated, setUserValidated] = useState(false);
@@ -100,6 +101,13 @@ export default function AdminPage() {
             <span>Message</span>
           </Link>
           <Link
+            to="/adminregister"
+            className="flex items-center space-x-2 text-black text-lg font-medium hover:bg-yellow-500 rounded-lg px-4 py-2"
+          >
+            <SiGnuprivacyguard />
+            <span>Sign up</span>
+          </Link>
+          <Link
             to="/"
             className="flex items-center space-x-2 text-black text-lg font-medium hover:bg-yellow-500 rounded-lg px-4 py-2"
           >
@@ -162,6 +170,7 @@ export default function AdminPage() {
             <Route path="/reviews" element={<ReviewController />} />
             <Route path="/dashboard" element={<AdminDashboard/>}/>
             <Route path="/message" element={<AdminMessage/>}/>
+           
 
           </Routes>
         )}

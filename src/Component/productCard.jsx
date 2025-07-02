@@ -117,6 +117,7 @@ export default function ProductCard({ item }) {
         <Link to={"/product/"+item.key} className="text-center mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md text-sm font-semibold transition">
           View Details
         </Link>
+        
       </div>
     </div>
   );

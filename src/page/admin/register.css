@@ -1,0 +1,9 @@
+.bg-picture {
+  background-image: url('/login2.jpg'); /* Ensure the image path is correct */
+  background-size: cover;  /* Make sure the background image covers the entire screen */
+  background-position: center; /* Center the background image */
+  background-attachment: fixed; /* Keep the background fixed */
+  height: 100vh; /* Ensures the div takes up full height */
+  width: 100%; /* Ensures the div spans the full width */
+  position: relative; /* Allows the image to stay fixed */
+}
