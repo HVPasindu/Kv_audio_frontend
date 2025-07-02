@@ -84,7 +84,13 @@ export default function AdminUserssPage() {
                   <td className="p-3">{user.role}</td>
                   <td className="p-3">{user.phoneNumber}</td>
                   <td className="p-3">{user.address || "N/A"}</td>
-                  <td onClick={()=>{handleBlockuser(user.email)}} className="p-3 cursor-pointer">{user.isBlocked?"BLOCKED":"ACTIVE"}</td>
+                  <td
+                    onClick={() => { handleBlockuser(user.email); }}
+                    className={`p-3 cursor-pointer ${user.isBlocked ? 'bg-red-500 text-white' : 'bg-green-500 text-white'}`}
+                  >
+                  {user.isBlocked ? "BLOCKED" : "ACTIVE"}
+                    </td>
+
                 </tr>
               ))}
             </tbody>
