@@ -1,59 +1,59 @@
-import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
 import meadiaUpload from "../../utils/mediaUpload";
+import axios from "axios";
 
 export default function UpdateItemPage() {
-  const location=useLocation();
-  console.log(location);
+  const location = useLocation();
   const [productKey, setProductKey] = useState(location.state.key);
   const [productName, setProductName] = useState(location.state.name);
   const [productPrice, setProductPrice] = useState(location.state.price);
   const [productCategory, setProductCategory] = useState(location.state.category);
   const [productDimension, setProductDimension] = useState(location.state.dimentions);
   const [productDescription, setProductDescription] = useState(location.state.description);
-  const [productImages,setProductImages]=useState([]);
-  const navigate=useNavigate();
- 
-  async function handleAddItem(){
-    //console.log(productKey,productName,productPrice,productCategory,productDimension,productDescription);
+  const [productImages, setProductImages] = useState([]);
+  const [productAvailability, setProductAvailability] = useState(location.state.availability); // Add state for availability
+  const navigate = useNavigate();
+
+  async function handleAddItem() {
     let updatingImages = location.state.image;
-    if(productImages.length>0){
-          const promises=[]
-          
-              for(let i=0;i<productImages.length;i++){
-                 //console.log(productImages[i]);
-                 const promise= meadiaUpload(productImages[i])
-                 promises.push(promise);
-              }
-                 updatingImages=await Promise.all(promises)
+    if (productImages.length > 0) {
+      const promises = [];
+      for (let i = 0; i < productImages.length; i++) {
+        const promise = meadiaUpload(productImages[i]);
+        promises.push(promise);
+      }
+      updatingImages = await Promise.all(promises);
     }
-    const token=localStorage.getItem("token");
-    if(token){
-        try{
-       const result= await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/product/${productKey}` ,
+
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const result = await axios.put(
+          `${import.meta.env.VITE_BACKEND_URL}/api/product/${productKey}`,
           {
-            name:productName,
-            price:productPrice,
-            category:productCategory,
-            dimentions:productDimension,
-            description:productDescription,
-            image:updatingImages,
-          },{
-            headers:{
-                Authorization:"Bearer " + token
-            }
+            name: productName,
+            price: productPrice,
+            category: productCategory,
+            dimentions: productDimension,
+            description: productDescription,
+            image: updatingImages,
+            availability: productAvailability,  // Include availability in the update request
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
           }
-        )
+        );
         toast.success(result.data.message);
-        navigate("/admin/items")
-    }catch(err){
+        navigate("/admin/items");
+      } catch (err) {
         toast.error(err.response.data.error);
-    }
-        //console.log(result);
-    }else{
-        toast.error("You are not authorize to add items")
+      }
+    } else {
+      toast.error("You are not authorized to update items");
     }
   }
 
@@ -108,12 +108,33 @@ export default function UpdateItemPage() {
         <input
           type="file"
           multiple
-          onChange={(e)=>{setProductImages(e.target.files)}} className=" w-full p-2 border rounded "
+          onChange={(e) => setProductImages(e.target.files)}
+          className="w-full p-2 border rounded"
         />
 
-        <button onClick={handleAddItem} className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full">Update Item
+        {/* Availability Checkbox */}
+        <label className="flex items-center space-x-2">
+          <input
+            type="checkbox"
+            checked={productAvailability}
+            onChange={() => setProductAvailability(!productAvailability)} // Toggle availability
+            className="form-checkbox"
+          />
+          <span>Available</span>
+        </label>
+
+        <button
+          onClick={handleAddItem}
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full"
+        >
+          Update Item
         </button>
-        <button onClick={()=>{navigate("/admin/items")}} className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-800 w-full">Cancel</button>
+        <button
+          onClick={() => navigate("/admin/items")}
+          className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-800 w-full"
+        >
+          Cancel
+        </button>
       </div>
     </div>
   );

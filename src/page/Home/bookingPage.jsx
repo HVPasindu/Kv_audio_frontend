@@ -72,6 +72,7 @@ export default function BookingPage() {
         localStorage.removeItem("cart");
         toast.success("Booking Created")
         setCart(loadCart());
+        location.reload();
     }).catch((err)=>{
         console.error(err);
         toast.error(err.response.data.message)

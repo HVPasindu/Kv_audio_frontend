@@ -105,7 +105,7 @@ export default function AdminOrdersPage() {
                   <td className="p-3">{new Date(order.endingDate).toLocaleDateString()}</td>
                   <td className="p-3">{order.totalAmount ? `Rs.${order.totalAmount}` : "N/A"}</td>
                   <td
-                    className={`p-3 ${order.status === "Pending" ? "bg-yellow-300 text-black" :
+                    className={`p-3 cursor-pointer ${order.status === "Pending" ? "bg-yellow-300 text-black" :
                order.status === "rejected" ? "bg-red-800 text-white" :
                order.status === "approved" ? "bg-green-300 text-green-800" :
                "bg-gray-300 text-gray-800"}`}

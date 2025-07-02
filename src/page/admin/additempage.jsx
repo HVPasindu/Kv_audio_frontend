@@ -1,8 +1,8 @@
-import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import meadiaUpload from "../../utils/mediaUpload";
+import axios from "axios";
 
 export default function AddItemPage() {
   const [productKey, setProductKey] = useState("");
@@ -11,53 +11,47 @@ export default function AddItemPage() {
   const [productCategory, setProductCategory] = useState("audio");
   const [productDimension, setProductDimension] = useState("");
   const [productDescription, setProductDescription] = useState("");
-  const [productImages,setProductImages]=useState([])
-  const navigate=useNavigate();
+  const [productImages, setProductImages] = useState([]);
+  const [productAvailability, setProductAvailability] = useState(true);  // Add availability state
+  const navigate = useNavigate();
 
-  async function handleAddItem(){
-    const promises=[]
+  async function handleAddItem() {
+    const promises = [];
 
-    for(let i=0;i<productImages.length;i++){
-       //console.log(productImages[i]);
-       const promise= meadiaUpload(productImages[i])
-       promises.push(promise);
+    for (let i = 0; i < productImages.length; i++) {
+      const promise = meadiaUpload(productImages[i]);
+      promises.push(promise);
     }
 
-    
-    //console.log(productKey,productName,productPrice,productCategory,productDimension,productDescription);
-   
-    const token=localStorage.getItem("token");
-    if(token){
-        try{
-              // Promise.all(promises).then((result)=>{
-              // console.log(result)
-              //  }).catch((err)=>{
-              //   toast.error(err)
-              //  })
-        const imageUrls=await Promise.all(promises)
-        console.log(imageUrls)
-       const result= await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/product/` ,
-          { key:productKey,
-            name:productName,
-            price:productPrice,
-            category:productCategory,
-            dimentions:productDimension,
-            description:productDescription,
-            image:imageUrls
-          },{
-            headers:{
-                Authorization:"Bearer " + token
-            }
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const imageUrls = await Promise.all(promises);
+        const result = await axios.post(
+          `${import.meta.env.VITE_BACKEND_URL}/api/product/`,
+          {
+            key: productKey,
+            name: productName,
+            price: productPrice,
+            category: productCategory,
+            dimentions: productDimension,
+            description: productDescription,
+            image: imageUrls,
+            availability: productAvailability,  // Send availability to backend
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
           }
-        )
+        );
         toast.success(result.data.message);
-        navigate("/admin/items")
-    }catch(err){
+        navigate("/admin/items");
+      } catch (err) {
         toast.error(err.response.data.error);
-    }
-        //console.log(result);
-    }else{
-        toast.error("You are not authorize to add items")
+      }
+    } else {
+      toast.error("You are not authorized to add items");
     }
   }
 
@@ -111,12 +105,33 @@ export default function AddItemPage() {
         <input
           type="file"
           multiple
-          onChange={(e)=>{setProductImages(e.target.files)}} className=" w-full p-2 border rounded "
+          onChange={(e) => setProductImages(e.target.files)}
+          className="w-full p-2 border rounded"
         />
 
-        <button onClick={handleAddItem} className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full">Add
+        {/* Availability Checkbox */}
+        <label className="flex items-center space-x-2">
+          <input
+            type="checkbox"
+            checked={productAvailability}
+            onChange={() => setProductAvailability(!productAvailability)}
+            className="form-checkbox"
+          />
+          <span>Available</span>
+        </label>
+
+        <button
+          onClick={handleAddItem}
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full"
+        >
+          Add Item
         </button>
-        <button onClick={()=>{navigate("/admin/items")}} className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-800 w-full">Cancel</button>
+        <button
+          onClick={() => navigate("/admin/items")}
+          className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-800 w-full"
+        >
+          Cancel
+        </button>
       </div>
     </div>
   );
