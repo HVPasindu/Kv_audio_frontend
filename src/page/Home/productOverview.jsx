@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import ImageSlider from "../../Component/imageSlider";
 import { addToCart, loadCart } from "../../utils/cart";
 import toast from "react-hot-toast";
@@ -11,6 +11,7 @@ export default function ProductOverview(){
     const key = params.key;
     const [loadingStatus,setLoadingStatus]=useState("loading");//success,error
     const [product,setProduct]=useState({})
+    const navigate=useNavigate();
     useEffect(()=>{
         axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/product/${key}`).then((res)=>{
             setProduct(res.data);
@@ -37,7 +38,7 @@ export default function ProductOverview(){
                 loadingStatus=="loaded"&&
                 <div className="w-full h-full flex justify-center md:flex-row items-center flex-col ">
                          <h1 className="text-3xl  font-bold my-6 md:hidden text-accent">{product.name} </h1>
-                        <div className="w-full  md:w-[35%]">
+                        <div className="w-full  md:w-[35%] mt-2">
                              <ImageSlider images={product.image}/> 
                         </div>
                         <div className="w-full md:w-[49%] p-2  flex flex-col items-center">
@@ -53,6 +54,10 @@ export default function ProductOverview(){
                                 toast.success("Added to cart");
                                 console.log(loadCart())
                             }}>Add to Cart</button>
+                            <button className="mt-4 bg-red-500 text-white px-4 py-2 rounded-md" onClick={()=>{
+                               navigate("/items")
+                                
+                            }}>Back</button>
                             
                         </div>
 
