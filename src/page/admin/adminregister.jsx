@@ -103,6 +103,12 @@ export default function AdminRegisterPage() {
         >
           Go to Login Page
         </button>
+         <button
+          className="mt-4 text-white bg-red-600 hover:bg-red-900 w-[300px] h-[45px] rounded-lg"
+          onClick={() => navigate("/admin/dashboard")}
+        >
+          Back
+        </button>
       </div>
     </div>
   );
