@@ -29,6 +29,26 @@ export default function AdminOrdersPage() {
     }
   }, [loading]);
 
+  const handleOrderStatusChange = async (orderId, status) => {
+    const token = localStorage.getItem("token");
+    try {
+      await axios.put(
+        `${import.meta.env.VITE_BACKEND_URL}/api/orders/status/${orderId}`,
+        { status },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      // Refresh orders after status change
+      setLoading(true);
+      setModalOpened(false); // Close modal after status change
+    } catch (error) {
+      console.error("Error changing order status:", error);
+    }
+  };
+
   const handleDeleteOrder = async (orderId) => {
     const token = localStorage.getItem("token");
     try {
@@ -84,7 +104,14 @@ export default function AdminOrdersPage() {
                   <td className="p-3">{new Date(order.startingDate).toLocaleDateString()}</td>
                   <td className="p-3">{new Date(order.endingDate).toLocaleDateString()}</td>
                   <td className="p-3">{order.totalAmount ? `Rs.${order.totalAmount}` : "N/A"}</td>
-                  <td className="p-3">{order.status}</td>
+                  <td
+                    className={`p-3 ${order.status === "Pending" ? "bg-yellow-300 text-black" :
+               order.status === "rejected" ? "bg-red-800 text-white" :
+               order.status === "approved" ? "bg-green-300 text-green-800" :
+               "bg-gray-300 text-gray-800"}`}
+                  >
+                    {order.status}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -162,4 +189,3 @@ export default function AdminOrdersPage() {
     </div>
   );
 }
-//commnent
