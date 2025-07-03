@@ -51,7 +51,7 @@ export default function AdminPage() {
   }, []);
 
   return (
-    <div className="h-screen w-full flex">
+    <div className="h-screen w-full flex ">
       {/* Sidebar */}
       <div className="w-[250px] h-full bg-accent hidden md:block px-4 py-6">
         <div className="text-center mb-8">
@@ -141,25 +141,47 @@ export default function AdminPage() {
       </div>
 
       {/* Mobile Nav */}
-      <div className="w-full h-[70px] shadow-xl flex justify-between items-center relative bg-accent text-white md:hidden">
-        <GiHamburgerMenu
-          className="absolute right-5 text-[24px] md:hidden "
-          onClick={() => {
-            setNavPanelOpen(true);
-          }}
-        />
-        <img
-          src="/kv_logo.png"
-          alt="Logo"
-          className="w-[60px] h-[60px] object-cover border-[3px] bg-amber-100 items-center absolute left-1 rounded-full"
-        />
-      </div>
+<div className="flex flex-col">
+  {/* Mobile Navigation Header */}
+  <div className="w-full h-[70px] shadow-xl flex justify-between items-center relative bg-accent text-white md:hidden">
+    <GiHamburgerMenu
+      className="absolute right-5 text-[24px] md:hidden"
+      onClick={() => {
+        setNavPanelOpen(true);
+      }}
+    />
+    <img
+      src="/kv_logo.png"
+      alt="Logo"
+      className="w-[60px] h-[60px] object-cover border-[3px] bg-amber-100 items-center absolute left-1 rounded-full"
+    />
+  </div>
+
+  {/* Mobile Main Content */}
+  <div className="w-full md:hidden h-[calc(100vh-70px)]">
+    <div className="bg-primary p-6">
+      {userValidated && (
+        <Routes>
+          <Route path="/orders" element={<AdminOrdersPage />} />
+          <Route path="/users" element={<AdminUserssPage />} />
+          <Route path="/items" element={<AdminItempage />} />
+          <Route path="/item/add" element={<Additempage />} />
+          <Route path="/item/edit" element={<UpdateItemPage />} />
+          <Route path="/reviews" element={<ReviewController />} />
+          <Route path="/dashboard" element={<AdminDashboard />} />
+          <Route path="/message" element={<AdminMessage />} />
+        </Routes>
+      )}
+    </div>
+  </div>
+</div>
+
 
       {/* Mobile Navigation Panel */}
       <MobileNavPaneladmin isOpen={navPanelOpen} setOpen={setNavPanelOpen} />
 
       {/* Main Content */}
-      <div className="w-[calc(100vw-250px)] bg-primary p-6">
+      <div className="w-[calc(100vw-250px)] bg-primary p-6 hidden md:block">
         {userValidated && (
           <Routes>
             <Route path="/orders" element={<AdminOrdersPage />} />
