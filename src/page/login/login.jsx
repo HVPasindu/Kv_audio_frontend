@@ -73,7 +73,7 @@ export default function LoginPage() {
 
   return (
     <div className="bg-picture h-screen flex justify-center items-center">
-      <div className="w-[400px] h-[500px] backdrop-blur-sm rounded-2xl flex flex-col items-center overflow-y-auto py-4">
+      <div className="custom-style w-[400px] h-[500px] backdrop-blur-sm rounded-2xl flex flex-col items-center overflow-y-auto py-4">
         <img
           src="/kv_logo.png"
           alt="logo"

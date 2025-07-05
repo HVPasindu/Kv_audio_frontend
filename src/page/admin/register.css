@@ -7,3 +7,8 @@
   width: 100%;
   position: relative; 
 }
+
+.custom-style {
+  border: 3px solid #3674B5;
+  box-shadow: 0px 0px 15px #3674B5, 0px 0px 15px #3674B5 inset;
+}
