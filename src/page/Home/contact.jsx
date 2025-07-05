@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { toast, ToastContainer } from 'react-toastify'; 
-import 'react-toastify/dist/ReactToastify.css'; 
+import { toast, ToastContainer } from 'react-toastify'; // Import toast and ToastContainer from react-toastify
+import 'react-toastify/dist/ReactToastify.css'; // Import Toastify CSS
 import { Link } from 'react-router-dom';
 
 export default function Contact() {
