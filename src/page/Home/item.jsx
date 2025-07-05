@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import ProductCard from "../../Component/productCard";
 
 export default function Items(){
-    const [state,setState]=useState("loading")//loading,success,error
+    const [state,setState]=useState("loading")
     const [items,setItem]=useState([]);
     useEffect(()=>{
         if(state=="loading"){
