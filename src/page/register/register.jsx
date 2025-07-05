@@ -3,6 +3,7 @@ import "./register.css";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import meadiaUpload from "../../utils/mediaUpload";
 
 
 export default function RegisterPage() {
@@ -13,9 +14,23 @@ export default function RegisterPage() {
   //const [role, setRole] = useState("");
   const [address, setAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [image, setImage] = useState(null);
   const navigate=useNavigate();
 
-  function handleOnSubmit(){
+  async function  handleOnSubmit(){
+     let imageUrl = '';  
+
+  
+  try {
+    imageUrl = await meadiaUpload(image); 
+    console.log(imageUrl);
+  } catch (err) {
+    toast.error("Image not uploaded correctly...");
+    console.log(err);
+    return;  
+  }
+
+
     axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/`,{
         email:email,
         password:password,
@@ -23,7 +38,8 @@ export default function RegisterPage() {
         lastName:lastName,
         //role:role,
         address:address,
-        phoneNumber:phoneNumber
+        phoneNumber:phoneNumber,
+        profilePicture:imageUrl
     }).then((res)=>{
         toast.success(res.data.message);
         navigate("/login");
@@ -79,6 +95,15 @@ export default function RegisterPage() {
           className="mt-3 w-[300px] h-[40px] bg-transparent border-b-2 border-white text-white text-xl outline-none"
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
+
+        <label className="mt-3 w-[300px] h-[40px] bg-transparent border-b-2 border-white text-white text-xl outline-none cursor-pointer">
+           {image ? 'Uploaded Photo' : 'Add Photo'}
+            <input
+              type="file"
+              className="hidden"
+              onChange={(e) => setImage(e.target.files[0])} // Set the selected file
+            />
+        </label>
 
         <button className="w-[300px] h-[45px] text-xl text-white rounded-lg bg-[#efac38] mt-6" onClick={handleOnSubmit}>
           Register

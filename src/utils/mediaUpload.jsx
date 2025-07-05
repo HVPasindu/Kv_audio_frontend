@@ -20,7 +20,8 @@ export default function meadiaUpload(file){
     }).then(()=>{
         const publicUrl=superbase.storage.from("images").getPublicUrl(fileName).data.publicUrl;
         resolve(publicUrl)
-    }).catch(()=>{
+    }).catch((error)=>{
+        console.error("Error uploading file: ", error);
         reject("Error uploading file")
     })
    })
