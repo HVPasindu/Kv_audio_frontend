@@ -41,9 +41,9 @@ export default function AdminOrdersPage() {
           },
         }
       );
-      // Refresh orders after status change
+      
       setLoading(true);
-      setModalOpened(false); // Close modal after status change
+      setModalOpened(false);
     } catch (error) {
       console.error("Error changing order status:", error);
     }
@@ -57,9 +57,9 @@ export default function AdminOrdersPage() {
           Authorization: `Bearer ${token}`,
         },
       });
-      // Refresh orders after deleting
+      
       setLoading(true);
-      setModalOpened(false); // Close modal after deletion
+      setModalOpened(false); 
     } catch (error) {
       console.error("Error deleting order:", error);
     }

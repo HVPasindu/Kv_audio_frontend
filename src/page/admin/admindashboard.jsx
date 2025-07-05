@@ -30,14 +30,14 @@ export default function AdminDashboard() {
 
   return (
     <div className="bg-primary min-h-screen flex flex-col py-6 px-4 md:px-10">
-      {/* Header */}
+      
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-accent">Admin Dashboard</h1>
       </div>
 
-      {/* Dashboard Cards */}
+      
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {/* Total Orders */}
+        
         <div className="bg-white p-6 rounded-lg shadow-lg flex items-center space-x-4">
           <div className="p-4 bg-accent text-white rounded-full">
             <FaShoppingCart className="text-3xl" />
@@ -48,7 +48,7 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        {/* Total Users */}
+        
         <div className="bg-white p-6 rounded-lg shadow-lg flex items-center space-x-4">
           <div className="p-4 bg-accent text-white rounded-full">
             <FaUsers className="text-3xl" />
@@ -59,7 +59,7 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        {/* Total Products */}
+        
         <div className="bg-white p-6 rounded-lg shadow-lg flex items-center space-x-4">
           <div className="p-4 bg-accent text-white rounded-full">
             <MdOutlineInventory className="text-3xl" />
@@ -70,7 +70,7 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        {/* Total Sales */}
+        
         <div className="bg-white p-6 rounded-lg shadow-lg flex items-center space-x-4">
           <div className="p-4 bg-accent text-white rounded-full">
             <FaChartBar className="text-3xl" />
@@ -82,7 +82,7 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      {/* Recent Orders Section */}
+      
       <div className="bg-white mt-8 p-6 rounded-lg shadow-lg">
         <h2 className="text-2xl font-semibold text-accent mb-4">Recent Orders</h2>
         <div className="overflow-x-auto">
@@ -97,7 +97,7 @@ export default function AdminDashboard() {
               </tr>
             </thead>
             <tbody>
-              {/* Example static data, replace with dynamic */}
+              
               <tr className="border-t hover:bg-gray-100">
                 <td className="py-3 px-6">12345</td>
                 <td className="py-3 px-6">John Doe</td>

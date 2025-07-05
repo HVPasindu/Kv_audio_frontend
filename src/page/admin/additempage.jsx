@@ -12,7 +12,7 @@ export default function AddItemPage() {
   const [productDimension, setProductDimension] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [productImages, setProductImages] = useState([]);
-  const [productAvailability, setProductAvailability] = useState(true);  // Add availability state
+  const [productAvailability, setProductAvailability] = useState(true); 
   const navigate = useNavigate();
 
   async function handleAddItem() {
@@ -37,7 +37,7 @@ export default function AddItemPage() {
             dimentions: productDimension,
             description: productDescription,
             image: imageUrls,
-            availability: productAvailability,  // Send availability to backend
+            availability: productAvailability,  
           },
           {
             headers: {
@@ -109,7 +109,7 @@ export default function AddItemPage() {
           className="w-full p-2 border rounded"
         />
 
-        {/* Availability Checkbox */}
+        
         <label className="flex items-center space-x-2">
           <input
             type="checkbox"
@@ -136,4 +136,3 @@ export default function AddItemPage() {
     </div>
   );
 }
-//dfjhs

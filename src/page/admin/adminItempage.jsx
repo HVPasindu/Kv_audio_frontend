@@ -40,7 +40,7 @@ export default function AdminItempage() {
       toast.success(res.data.message)
       //window.location.reload();
       setItemLoded(false);
-      // Optionally, refetch the product list or remove from UI
+      
     })
     .catch((err) => {
       alert("Failed to delete product: " + (err.response?.data?.message || err.message));

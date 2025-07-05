@@ -15,7 +15,7 @@ export default function AdminRegisterPage() {
   const [image, setImage] = useState(null);
   const navigate = useNavigate();
 
-  // Role is set as "admin" by default
+  
   const role = "admin";
 
   async function handleOnSubmit() {
@@ -32,7 +32,7 @@ export default function AdminRegisterPage() {
   }
 
 
-    // Retrieve the token from localStorage or wherever you store it
+    
     const token = localStorage.getItem("token");
 
     axios
@@ -43,14 +43,14 @@ export default function AdminRegisterPage() {
           password: password,
           firstName: firstName,
           lastName: lastName,
-          role: role,  // Admin role is passed here
+          role: role,  
           address: address,
           phoneNumber: phoneNumber,
           profilePicture:imageUrl
         },
         {
           headers: {
-            Authorization: `Bearer ${token}`,  // Send the token in the request header
+            Authorization: `Bearer ${token}`,  
           },
         }
       )
@@ -122,7 +122,7 @@ export default function AdminRegisterPage() {
             <input
               type="file"
               className="hidden"
-              onChange={(e) => setImage(e.target.files[0])} // Set the selected file
+              onChange={(e) => setImage(e.target.files[0])} 
             />
         </label>
         <button

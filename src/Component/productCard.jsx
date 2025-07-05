@@ -1,5 +1,5 @@
 import ProductImageCarousel from "./imageswitch";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // default styles
+import "react-responsive-carousel/lib/styles/carousel.min.css"; 
 import { Carousel } from "react-responsive-carousel";
 import { Link } from "react-router-dom";
 
@@ -80,7 +80,7 @@ export default function ProductCard({ item }) {
 
 
 
-      {/* Content Section */}
+      
       <div className="p-4 flex flex-col flex-grow">
         <div className="flex-grow">
           <h2 className="text-xl font-bold text-gray-800 mb-1">{item.name}</h2>
@@ -113,7 +113,7 @@ export default function ProductCard({ item }) {
           <p className="text-xs text-gray-400 mt-2">Product ID: {item.key}</p>
         </div>
 
-        {/* Button */}
+        
         <Link to={"/product/"+item.key} className="text-center mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md text-sm font-semibold transition">
           View Details
         </Link>

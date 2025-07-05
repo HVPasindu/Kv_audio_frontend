@@ -41,7 +41,7 @@ export default function MobileNavPanel(props) {
 			{isOpen && (
 				<div className="w-full h-screen bg-[#00000070] fixed top-0 left-0 z-50">
 					<div className="h-full bg-white w-[300px] shadow-lg">
-						{/* Header */}
+						
 						<div className="bg-accent w-full h-[70px] flex relative justify-center items-center">
 							<img
 								src="/logo.png"
@@ -56,7 +56,7 @@ export default function MobileNavPanel(props) {
 							/>
 						</div>
 
-						{/* Navigation Links */}
+					
 						<div
 							onClick={() => {
 								goTo("/");
@@ -151,4 +151,3 @@ export default function MobileNavPanel(props) {
 		</>
 	);
 }
-//jkfd

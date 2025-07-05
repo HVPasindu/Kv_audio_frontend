@@ -6,7 +6,7 @@ export default function ProductImageCarousel({ images = [], alt }) {
   useEffect(() => {
     const timer = setInterval(() => {
       setIndex((prev) => (prev + 1) % images.length);
-    }, 3000); // change every 3 seconds
+    }, 3000); 
     return () => clearInterval(timer);
   }, [images]);
 

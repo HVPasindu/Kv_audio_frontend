@@ -10,7 +10,7 @@ export default function AdminMessage() {
   const [modalOpened, setModalOpened] = useState(false);
   const [activeInquiry, setActiveInquiry] = useState(null);
 
-  // Fetch all inquiries
+  
   useEffect(() => {
     const fetchInquiries = async () => {
       try {
@@ -31,10 +31,10 @@ export default function AdminMessage() {
     fetchInquiries();
   }, []);
 
-  // Handle inquiry update
+  
   const handleInquiryUpdate = (id, status) => {
     const token = localStorage.getItem('token');
-    const updatedData = { status }; // Assuming you're updating status
+    const updatedData = { status }; 
 
     axios
       .put(`${import.meta.env.VITE_BACKEND_URL}/api/inquiry/update/${id}`, updatedData, {
@@ -53,7 +53,7 @@ export default function AdminMessage() {
       });
   };
 
-  // Handle delete inquiry
+  
   const handleDeleteInquiry = (id) => {
     const token = localStorage.getItem('token');
 
@@ -77,7 +77,7 @@ export default function AdminMessage() {
     <div className="bg-primary min-h-screen flex flex-col py-6 px-4 md:px-10">
       <h1 className="text-3xl font-semibold mb-6 text-accent">Manage Inquiries</h1>
 
-      {/* Inquiries Table */}
+      
       <div className="overflow-x-auto w-full max-w-7xl">
         <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
           <thead>
@@ -125,7 +125,7 @@ export default function AdminMessage() {
         </table>
       </div>
 
-      {/* Inquiry Update Modal */}
+      
       {modalOpened && activeInquiry && (
         <div className="fixed top-0 left-0 w-full h-full bg-[#00000075] flex justify-center items-center">
           <div className="w-[90%] max-w-md bg-white p-6 rounded-lg shadow-lg relative">
@@ -143,7 +143,7 @@ export default function AdminMessage() {
               <p><span className="font-semibold">Current Status:</span> {activeInquiry.status}</p>
             </div>
 
-            {/* Status Update Buttons */}
+            
             <div className="mt-6 flex justify-center gap-6">
               <button
                 className="bg-green-500 text-white py-2 px-6 rounded-md hover:bg-green-600 transition"
@@ -162,7 +162,7 @@ export default function AdminMessage() {
         </div>
       )}
 
-      {/* Toast Notifications */}
+     
       <ToastContainer />
     </div>
   );

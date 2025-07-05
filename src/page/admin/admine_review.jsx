@@ -8,7 +8,7 @@ export default function ReviewController() {
   const [isLoading, setIsLoading] = useState(true);
   const token = localStorage.getItem('token');
 
-  // Fetch all reviews
+  
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/review`, {
@@ -17,18 +17,18 @@ export default function ReviewController() {
         },
       })
       .then((response) => {
-        setReviews(response.data); // Set reviews state
+        setReviews(response.data); 
       })
       .catch((error) => {
         console.error('Error fetching reviews:', error);
         toast.error('Failed to fetch reviews.');
       })
       .finally(() => {
-        setIsLoading(false); // Stop the loading spinner after fetching data
+        setIsLoading(false); 
       });
   }, [token]);
 
-  // Approve review
+  
   const handleApprove = (email) => {
     axios
       .put(
@@ -52,7 +52,7 @@ export default function ReviewController() {
       });
   };
 
-  // Reject review
+  
   const handleReject = (email) => {
     axios
       .delete(`${import.meta.env.VITE_BACKEND_URL}/api/review/${email}`, {
@@ -61,7 +61,7 @@ export default function ReviewController() {
         },
       })
       .then(() => {
-        setReviews(reviews.filter((review) => review.email !== email)); // Remove rejected review from the list
+        setReviews(reviews.filter((review) => review.email !== email)); 
         toast.success('Review rejected successfully!');
       })
       .catch((error) => {
@@ -78,12 +78,12 @@ export default function ReviewController() {
         </div>
       </header>
 
-      {/* Main Content Section */}
+      
       <section className="px-6 py-12">
         <h2 className="text-3xl font-bold text-center text-accent mb-6">Review Management</h2>
         {isLoading ? (
           <div className="flex justify-center">
-            <div className="loader"></div> {/* Use a simple loader or spinner */}
+            <div className="loader"></div> 
           </div>
         ) : (
           <div className="space-y-6">
@@ -136,7 +136,7 @@ export default function ReviewController() {
         <p>&copy; 2025 KV Audio. All rights reserved.</p>
       </footer>
 
-      {/* Toast Notifications */}
+      
       <ToastContainer />
     </div>
   );

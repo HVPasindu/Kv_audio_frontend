@@ -13,7 +13,7 @@ export default function UpdateItemPage() {
   const [productDimension, setProductDimension] = useState(location.state.dimentions);
   const [productDescription, setProductDescription] = useState(location.state.description);
   const [productImages, setProductImages] = useState([]);
-  const [productAvailability, setProductAvailability] = useState(location.state.availability); // Add state for availability
+  const [productAvailability, setProductAvailability] = useState(location.state.availability); 
   const navigate = useNavigate();
 
   async function handleAddItem() {
@@ -39,7 +39,7 @@ export default function UpdateItemPage() {
             dimentions: productDimension,
             description: productDescription,
             image: updatingImages,
-            availability: productAvailability,  // Include availability in the update request
+            availability: productAvailability,  
           },
           {
             headers: {
@@ -112,12 +112,12 @@ export default function UpdateItemPage() {
           className="w-full p-2 border rounded"
         />
 
-        {/* Availability Checkbox */}
+        
         <label className="flex items-center space-x-2">
           <input
             type="checkbox"
             checked={productAvailability}
-            onChange={() => setProductAvailability(!productAvailability)} // Toggle availability
+            onChange={() => setProductAvailability(!productAvailability)} 
             className="form-checkbox"
           />
           <span>Available</span>
