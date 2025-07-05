@@ -1,31 +1,31 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { toast, ToastContainer } from 'react-toastify'; // Import toast and ToastContainer from react-toastify
-import 'react-toastify/dist/ReactToastify.css'; // Import Toastify CSS
+import { toast, ToastContainer } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
 import { Link } from 'react-router-dom';
 
 export default function Contact() {
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Handle message change
+  
   const handleMessageChange = (event) => {
     setMessage(event.target.value);
   };
 
-  // Handle send message logic
+  
   const handleSendMessage = async () => {
     if (!message) {
-      toast.error('Please enter a message before submitting.'); // Show error if message is empty
+      toast.error('Please enter a message before submitting.'); 
       return;
     }
 
     setIsSubmitting(true);
 
     try {
-      const token = localStorage.getItem('token'); // Get the token from localStorage
+      const token = localStorage.getItem('token');
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/inquiry/`, // Backend URL to send message
+        `${import.meta.env.VITE_BACKEND_URL}/api/inquiry/`, 
         {
           message: message,
         },
@@ -42,18 +42,18 @@ export default function Contact() {
         toast.success(`${response.data.message || 'Your inquiry has been sent successfully!'}`);
       
 
-      setMessage(''); // Clear message after sending
+      setMessage(''); 
     } catch (err) {
-      //console.log(err.response.data.message)
-      toast.error(err?.response?.data?.message || 'An error occurred during submission.'); // Handle any errors
+     
+      toast.error(err?.response?.data?.message || 'An error occurred during submission.'); 
     } finally {
-      setIsSubmitting(false); // Reset the submitting state
+      setIsSubmitting(false); 
     }
   };
 
   return (
     <div className="bg-gradient-to-r from-blue-100 to-blue-200 min-h-screen flex flex-col">
-      {/* Header Section */}
+     
       <header className="p-6 bg-primary text-white flex justify-between items-center">
         <div className="text-2xl font-bold">
           <span className="text-accent">KV Audio</span>
@@ -65,9 +65,9 @@ export default function Contact() {
         </div>
       </header>
 
-      {/* Main Content Section */}
+      
       <section className="flex flex-col md:flex-row justify-center gap-12 px-6 py-12">
-        {/* Contact Info Section */}
+       
         <div className="w-full md:w-1/2 max-w-md bg-white p-6 rounded-lg shadow-lg">
           <h2 className="text-2xl font-bold text-accent mb-4">Get In Touch</h2>
           <div className="text-gray-700 space-y-2">
@@ -88,7 +88,7 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* Message Form Section */}
+       
         <div className="w-full md:w-1/2 max-w-md bg-white p-6 rounded-lg shadow-lg">
           <h2 className="text-2xl font-bold text-accent mb-4">Send Us a Message</h2>
           <textarea
@@ -109,7 +109,7 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Share Your Experience Section */}
+     
       <section className="bg-primary py-12 text-center">
         <p className="text-xl font-semibold text-gray-700 mb-4">Share Your Experience</p>
         <p className="text-gray-700 mb-4">We value your feedback! Leave a review about our services.</p>
@@ -118,12 +118,12 @@ export default function Contact() {
         </Link>
       </section>
 
-      {/* Footer Section */}
+      
       <footer className="bg-accent text-white p-4 text-center">
         <p>&copy; 2025 KV Audio. All rights reserved.</p>
       </footer>
 
-      {/* Toast Container */}
+      
       <ToastContainer />
     </div>
   );
