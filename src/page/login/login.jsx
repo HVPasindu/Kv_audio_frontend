@@ -35,14 +35,14 @@ export default function LoginPage() {
     },
   });
 
-  // Handle form submission
+  
   function handleOnSubmit() {
     if (!email || !password) {
       toast.error("Please fill in both email and password.");
       return;
     }
 
-    setLoading(true); // Set loading to true when submitting
+    setLoading(true);
 
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/api/user/login`, {
@@ -67,7 +67,7 @@ export default function LoginPage() {
         toast.error(err?.response?.data?.error || "An error occurred during login.");
       })
       .finally(() => {
-        setLoading(false); // Reset loading state
+        setLoading(false); 
       });
   }
 
@@ -81,21 +81,32 @@ export default function LoginPage() {
         />
         <h2 className="text-2xl text-white font-semibold mb-6">Login to Your Account</h2>
 
-        {/* Input Fields */}
+        
         <input
           type="email"
           placeholder="Email"
           className="mt-3 w-[300px] h-[40px] bg-transparent border-b-2 border-white text-white text-xl outline-none"
           onChange={(e) => setEmail(e.target.value)}
         />
+        <div >
         <input
           type="password"
           placeholder="Password"
+          id="pwd"
           className="mt-3 w-[300px] h-[40px] bg-transparent border-b-2 border-white text-white text-xl outline-none"
           onChange={(e) => setPassword(e.target.value)}
         />
+        <input
+          type="checkbox"
+          onClick={() => {
+          const pwdField = document.getElementById("pwd");
+          pwdField.type = pwdField.type === "password" ? "text" : "password";  // Toggle between 'password' and 'text'
+        }}
+       />
+  
+        </div>
 
-        {/* Submit Button */}
+        
         <button
           className={`w-[300px] h-[45px] text-xl text-white rounded-lg bg-[#efac38] mt-6 ${
             loading ? "opacity-50 cursor-not-allowed" : ""
@@ -106,7 +117,7 @@ export default function LoginPage() {
           {loading ? "Logging in..." : "Login"}
         </button>
 
-        {/* Google Login */}
+        
         <div
           className="w-[300px] h-[45px] text-xl text-white rounded-lg bg-gradient-to-r from-blue-500 to-green-500 my-4 text-center cursor-pointer"
           onClick={googleLogin}
@@ -114,7 +125,7 @@ export default function LoginPage() {
           Login with Google
         </div>
 
-        {/* Footer Text */}
+       
         <div className="mt-4 text-white">
           <span>Don't have an account?</span>
           <a href="/register" className="text-blue-500 hover:underline ml-2">
@@ -122,7 +133,7 @@ export default function LoginPage() {
           </a>
         </div>
 
-        {/* Button to Go to Home Page */}
+       
         <button
           className="mt-4 text-white bg-blue-600 hover:bg-blue-700 w-[300px] h-[45px] rounded-lg"
           onClick={() => navigate("/")}

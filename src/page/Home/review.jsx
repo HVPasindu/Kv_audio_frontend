@@ -13,6 +13,10 @@ export default function ReviewPage() {
 
   const token = localStorage.getItem('token');
 
+  function re(){
+    location.reload();
+  }
+
  
   useEffect(() => {
     axios
@@ -64,10 +68,14 @@ export default function ReviewPage() {
       )
       .then((response) => {
        
-        toast.success('Review added successfully!');
+        
         setReview('');
         setRating(0);
-        setReviews([...reviews, response.data]); 
+        //setReviews([...reviews, response.data]); 
+        setReviews((prevReviews) => [...prevReviews, response.data]);
+        toast.success('Review added successfully!');
+        setTimeout(re,1000) 
+        
       })
       .catch((error) => {
         console.log(error)
@@ -76,6 +84,7 @@ export default function ReviewPage() {
       })
       .finally(() => {
         setIsSubmitting(false);
+        //location.reload();
       });
   };
 
