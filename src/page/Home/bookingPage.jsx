@@ -39,7 +39,7 @@ export default function BookingPage() {
     calculateToatal();
   },[startDate,endDate])
 
-  // Calculate number of days between start and end date
+  
   const calculateDays = () => {
     const start = new Date(startDate);
     const end = new Date(endDate);

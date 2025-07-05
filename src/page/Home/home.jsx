@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function Home() {
   return (
     <div className="min-h-screen bg-primary">
-      {/* Header / Hero Section */}
+      
       <div className="bg-accent py-16">
         <div className="container mx-auto px-4 text-center max-w-screen-xl">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
@@ -22,7 +22,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Features Section */}
+      
       <div className="container mx-auto px-4 py-16 max-w-screen-xl">
         <h2 className="text-2xl md:text-3xl font-bold text-center mb-10">
           Why Choose Us?
@@ -64,7 +64,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Call to Action */}
+      
       <div className="bg-accent py-10">
         <div className="container mx-auto px-4 text-center max-w-screen-xl">
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
@@ -79,7 +79,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Footer / Bottom Section */}
+      
       <div className="bg-gray-800 text-white py-16 ">
         <div className="container mx-auto px-4 text-center max-w-screen-xl ">
           <h3 className="text-xl font-semibold mb-4">KV Audio</h3>
