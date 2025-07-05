@@ -3,6 +3,7 @@ import "./register.css";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import meadiaUpload from "../../utils/mediaUpload";
 
 export default function AdminRegisterPage() {
   const [email, setEmail] = useState("");
@@ -11,12 +12,26 @@ export default function AdminRegisterPage() {
   const [lastName, setLastName] = useState("");
   const [address, setAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [image, setImage] = useState(null);
   const navigate = useNavigate();
 
   // Role is set as "admin" by default
   const role = "admin";
 
-  function handleOnSubmit() {
+  async function handleOnSubmit() {
+     let imageUrl = '';  
+
+  
+  try {
+    imageUrl = await meadiaUpload(image); 
+    console.log(imageUrl);
+  } catch (err) {
+    toast.error("Image not uploaded correctly...");
+    console.log(err);
+    return;  
+  }
+
+
     // Retrieve the token from localStorage or wherever you store it
     const token = localStorage.getItem("token");
 
@@ -31,6 +46,7 @@ export default function AdminRegisterPage() {
           role: role,  // Admin role is passed here
           address: address,
           phoneNumber: phoneNumber,
+          profilePicture:imageUrl
         },
         {
           headers: {
@@ -91,6 +107,14 @@ export default function AdminRegisterPage() {
           className="mt-3 w-[300px] h-[40px] bg-transparent border-b-2 border-white text-white text-xl outline-none"
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
+        <label className="mt-3 w-[300px] h-[40px] bg-transparent border-b-2 border-white text-white text-xl outline-none cursor-pointer">
+           {image ? 'Uploaded Photo' : 'Add Photo'}
+            <input
+              type="file"
+              className="hidden"
+              onChange={(e) => setImage(e.target.files[0])} // Set the selected file
+            />
+        </label>
         <button
           className="w-[300px] h-[45px] text-xl text-white rounded-lg bg-[#efac38] mt-6"
           onClick={handleOnSubmit}
