@@ -100,7 +100,7 @@ export default function LoginPage() {
           type="checkbox"
           onClick={() => {
           const pwdField = document.getElementById("pwd");
-          pwdField.type = pwdField.type === "password" ? "text" : "password";  // Toggle between 'password' and 'text'
+          pwdField.type = pwdField.type === "password" ? "text" : "password";
         }}
        />
   

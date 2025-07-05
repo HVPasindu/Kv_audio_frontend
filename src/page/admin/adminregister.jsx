@@ -89,12 +89,22 @@ export default function AdminRegisterPage() {
           className="mt-3 w-[300px] h-[40px] bg-transparent border-b-2 border-white text-white text-xl outline-none"
           onChange={(e) => setEmail(e.target.value)}
         />
+        <div>
         <input
           type="password"
+          id="pwd"
           placeholder="Password"
           className="mt-3 w-[300px] h-[40px] bg-transparent border-b-2 border-white text-white text-xl outline-none"
           onChange={(e) => setPassword(e.target.value)}
         />
+        <input
+          type="checkbox"
+          onClick={() => {
+          const pwdField = document.getElementById("pwd");
+          pwdField.type = pwdField.type === "password" ? "text" : "password";
+        }}
+       />
+        </div>
         <input
           type="text"
           placeholder="Address"
