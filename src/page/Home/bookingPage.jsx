@@ -72,14 +72,16 @@ export default function BookingPage() {
         localStorage.removeItem("cart");
         toast.success("Booking Created")
         setCart(loadCart());
-        location.reload();
+        setTimeout(re,1000) 
     }).catch((err)=>{
         console.error(err);
         toast.error(err.response.data.message)
         
     })
   }
-
+  function re(){
+    location.reload();
+  }
   return (
     <div className="w-full h-full flex flex-col items-center">
       <h1 className="text-accent text-2xl font-bold mb-4">Create Booking</h1>
