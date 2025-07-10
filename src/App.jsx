@@ -15,28 +15,28 @@ import AdminRegister from './page/admin/adminregister';
 
 
 function App() {
-  
+
 
   return (
-    <>
+
     <GoogleOAuthProvider clientId="317857477878-kpbfnslu10ler5is7muma64earhftqk6.apps.googleusercontent.com">
       <BrowserRouter>
-        <Toaster/>
+        <Toaster />
         <Routes path="/*">
-          <Route path='/admin/*' element={<Adminpage/>}/>
-          <Route path='/*' element={<HomePage/>}/>
-          <Route path="/login" element={<LoginPage/>}/>
-          <Route path="/register" element={<RegisterPage/>}/>
-          <Route path="/verify-email" element={<VerifyEmail/>}/>
-          <Route path="/adminregister" element={<AdminRegister/>}/>
-          
-          
-          <Route path="/testing" element={<Testing/>}/>
-       
+          <Route path='/admin/*' element={<Adminpage />} />
+          <Route path='/*' element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/verify-email" element={<VerifyEmail />} />
+          <Route path="/adminregister" element={<AdminRegister />} />
+
+
+          <Route path="/testing" element={<Testing />} />
+
         </Routes>
       </BrowserRouter>
     </GoogleOAuthProvider>
-    </>
+
   )
 }
 
