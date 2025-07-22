@@ -29,7 +29,7 @@ export default function MobileNavPaneladmin(props) {
               <img
                 src="/logo.png"
                 alt="logo"
-                className="w-[60px] h-[60px] object-cover border-[3px] absolute left-1 rounded-full"
+                className="w-[60px] h-[60px] object-cover border-[3px] bg-amber-100 items-center absolute left-1 rounded-full"
               />
               <IoMdClose
                 className="absolute right-3 text-3xl cursor-pointer"
@@ -83,7 +83,7 @@ export default function MobileNavPaneladmin(props) {
 
            <div
               onClick={() => {
-                goTo("/admin//reviews");
+                goTo("/admin/reviews");
               }}
               className="text-[20px] text-accent m-1 p-2 flex items-center gap-2 cursor-pointer hover:bg-accent/10 rounded-md"
             >
