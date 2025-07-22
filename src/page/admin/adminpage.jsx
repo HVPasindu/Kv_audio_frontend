@@ -19,6 +19,7 @@ import AdminDashboard from "./admindashboard";
 import { FiMessageSquare } from "react-icons/fi";
 import AdminMessage from "./adminmessage";
 import { SiGnuprivacyguard } from "react-icons/si";
+import Errorss from "./adminerror";
 
 export default function AdminPage() {
   const [userValidated, setUserValidated] = useState(false);
@@ -170,6 +171,7 @@ export default function AdminPage() {
           <Route path="/reviews" element={<ReviewController />} />
           <Route path="/dashboard" element={<AdminDashboard />} />
           <Route path="/message" element={<AdminMessage />} />
+           <Route path="/*" element={<Errorss/>}/>
         </Routes>
       )}
     </div>
@@ -192,6 +194,7 @@ export default function AdminPage() {
             <Route path="/reviews" element={<ReviewController />} />
             <Route path="/dashboard" element={<AdminDashboard/>}/>
             <Route path="/message" element={<AdminMessage/>}/>
+            <Route path="/*" element={<Errorss/>}/>
            
 
           </Routes>
