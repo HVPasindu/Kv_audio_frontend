@@ -5,6 +5,8 @@ import { FaRegBookmark, FaRegCalendarCheck, FaRegUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { BsGraphDown } from "react-icons/bs";
 import { GoCodeReview, GoHome } from "react-icons/go";
+import { FiMessageSquare } from "react-icons/fi";
+import { SiGnuprivacyguard } from "react-icons/si";
 
 export default function MobileNavPaneladmin(props) {
   const token = localStorage.getItem("token")
@@ -87,6 +89,24 @@ export default function MobileNavPaneladmin(props) {
             >
               <GoCodeReview className="text-2xl" />
               Reviews
+            </div>
+            <div
+              onClick={() => {
+                goTo("/admin/message");
+              }}
+              className="text-[20px] text-accent m-1 p-2 flex items-center gap-2 cursor-pointer hover:bg-accent/10 rounded-md"
+            >
+              <FiMessageSquare className="text-2xl" />
+              Message
+            </div>
+            <div
+              onClick={() => {
+                goTo("/adminregister");
+              }}
+              className="text-[20px] text-accent m-1 p-2 flex items-center gap-2 cursor-pointer hover:bg-accent/10 rounded-md"
+            >
+              <SiGnuprivacyguard className="text-2xl" />
+              Sign up
             </div>
             <div
               onClick={() => {
